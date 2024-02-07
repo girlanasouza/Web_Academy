@@ -1,0 +1,17 @@
+.conteudo {
+    border: 10px solid orange;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 240px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 16px;
+    margin: 50px 10px 10px 50px;
+}
+h1 {
+    font-size: 30px;
+}
+p {
+    padding: 10px;
+}
+

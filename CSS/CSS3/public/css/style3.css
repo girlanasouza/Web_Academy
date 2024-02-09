@@ -1,12 +1,19 @@
+
+body {
+    background-image: url(../imagens/nebulosa.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .conteudo {
-    border: 10px solid orange;
+    border: 8px solid orange;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     width: 240px;
     padding: 10px;
     text-align: center;
-    border-radius: 16px;
+    border-radius: 25px;
     margin: 50px 10px 10px 50px;
+   
 }
 h1 {
     font-size: 30px;

@@ -13,18 +13,14 @@
             box-sizing: border-box;
         }
 
-        body{
-            background-color: rgb(242, 240, 238);
-        }
-
         .container {
             display: grid;
             margin: 20px;
-            grid-template-areas:
-            "header     header  header   header     header      header"
-            "main       main    main    main        ads         ads"
-            "main       main    main    main        nav         footer";
             gap: 10px;
+            grid-template-areas:
+            "header     header  header  nav     nav     nav"
+            "main       ads    ads    ads     ads     ads"
+            "footer     footer  footer  footer  footer  footer";
         }
 
         .container > div{
@@ -33,7 +29,7 @@
         }
 
         .container > header {
-            background-color: rgb(154, 1, 1);;
+            background-color: rgb(154, 1, 1);
             grid-area: header;
         }
         .container > nav {
@@ -44,10 +40,10 @@
         .container > main {
             background-color: rgb(3, 117, 24);
             grid-area: main;
-
         }
+
         .container > aside {
-            background-color: rgb(109, 18, 145);
+            background-color: rgb(147, 4, 204);
             grid-area: ads;
         }
 
@@ -60,7 +56,7 @@
             border-radius: 10px;
             min-height: 150px;
         }
-
+        
     </style>
 </head>
 <body>

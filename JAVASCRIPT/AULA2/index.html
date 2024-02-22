@@ -1,60 +1,29 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Silly story generator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>The Best Music</title>
 
-
-    <style>
-      
-      body {
-        font-family: helvetica, sans-serif;
-        width: 350px;
-      }
-
-      label {
-        font-weight: bold;
-      }
-
-      div {
-        padding-bottom: 20px;
-      }
-
-      input[type="text"] {
-        padding: 5px;
-        width: 150px;
-      }
-
-      p {
-        color: white;
-        background-color: black;
-        
-        width: 100%;
-        padding: 10px;
-        visibility: hidden;
-      }
-    </style>
-
+    <link rel="stylesheet" href="style.css">
+    
   </head>
 
   <body>
-    
-    <div>
-      <label for="customname">Enter custom name:</label>
-      <input id="customname" type="text" placeholder="" />
+    <h1>The best musics</h1>
+
+    <div class="full-img">
+      <img class="displayed-img" src="images/music1.png" alt="Closeup of a human eye">
+      <div class="overlay"></div>
+      <button class="dark">Darken</button>
     </div>
-    <div>
-      <label for="us">US</label
-      ><input id="us" type="radio" name="ukus" value="us" checked />
-      <label for="uk">UK</label
-      ><input id="uk" type="radio" name="ukus" value="uk" />
+
+    <div class="thumb-bar">
+
     </div>
-    <div>
-      <button class="randomize">Generate random story</button>
-    </div>
-    <!-- Thanks a lot to Willy Aguirre for his help with the code for this assessment -->
-    <p class="story"></p>
-    <script type="text/javascript" src="main.js"></script>
+
+    <script src="main.js"></script>
   </body>
 </html>
+
+

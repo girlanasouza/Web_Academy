@@ -1,0 +1,46 @@
+<body>
+  <h1>Várias listas</h1>
+
+  <p id="lista-titulo" name="lista">Lista de itens:</p>
+
+  <ul class="lista-itens-1">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <ul class="lista-itens-2">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <ul class="lista-itens-3">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <ul class="lista-itens-4">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+  <script>
+    console.log('Resultado Letra A');
+    let eleLista2A = document.querySelector('.lista-itens-2').querySelectorAll('li');
+    for (let index = 0; index < eleLista2A.length; index++) {
+      console.log(eleLista2A.item(index).textContent);
+    }
+    console.log('Resultado Letra B');
+    // // letra b
+    let eleLista2B = document.querySelector('.lista-itens-2').getElementsByClassName('hot');
+    for (let index = 0; index < eleLista2B.length; index++) {
+      console.log(eleLista2B.item(index).textContent);
+    }
+  </script>
+</body>

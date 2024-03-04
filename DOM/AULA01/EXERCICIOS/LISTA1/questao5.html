@@ -1,0 +1,50 @@
+<body>
+    <h1>Várias listas</h1>
+  
+    <p id="lista-titulo" name="lista">Lista de itens:</p>
+  
+    <ul class="lista-itens-1">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-2">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-3">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-4">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+    <script>
+        // letra a
+        let elA = document.querySelector('.lista-itens-2').querySelectorAll('li');
+        for (let index = 0; index < elA.length; index++) {
+            console.log(elA.item(index).textContent);
+            elA[index].style.color = 'orange';
+        }
+
+        // letra b
+        for (var i = 0; i < elA.length; i++) {
+            if (elA[i].classList.contains('hot')) {
+                elA[i].classList.replace('hot', 'cold');
+            } else {
+                elA[i].classList.add('cold');
+            }
+        }
+    </script>
+  </body>

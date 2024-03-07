@@ -1,0 +1,59 @@
+<body>
+    <h1>To-do</h1>
+  
+    <div>
+      <p id="lista-titulo" name="lista">Lista de atividades:</p>
+    </div>
+  
+    <div>
+      <input placeholder="Digite aqui o item" />
+      <button>Adicionar</button>
+    </div>
+  
+    <ul id="lista-itens">
+      <li>item a</li>
+    </ul>
+  
+    <div>
+      <button>Remover último item</button>
+    </div>
+</body>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.querySelector('div > button');
+    const input = document.querySelector('input');
+    const lista1 = document.getElementById('lista-itens');
+    const removeButton = document.querySelectorAll('div > button')[1];
+
+    function addItem() {
+      const valor = input.value.trim();
+      if (valor) {
+        const newItem = document.createElement('li');
+        newItem.textContent = valor;
+        lista1.appendChild(newItem);
+        input.value = '';
+      }
+      else {
+          alert ('Insira um valor válido :/');
+      }
+    }
+
+    function removeLastItem() {
+      const ultimoItem = lista1.lastChild;
+      if (ultimoItem) {
+        lista1.removeChild(ultimoItem);
+      }
+      else {
+        alert('Não tem elemento para ser removido :/');
+      }
+    }
+
+    addButton.addEventListener('click', addItem);
+    removeButton.addEventListener('click', removeLastItem);
+  });
+    
+
+</script>
+    

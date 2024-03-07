@@ -1,0 +1,45 @@
+<body>
+  <h1>Várias listas</h1>
+
+  <div>
+    <p id="lista-titulo" name="lista">Lista de itens:</p>
+  </div>
+
+  <ul id="lista-itens-1">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+  
+</body>
+
+<script>
+  let starItem = document.getElementsByTagName('ul')[0];
+
+  // imprimindo o primeiro filho
+  console.log(starItem.firstChild);
+
+  // imprimindo o primeiro filho
+  console.log(starItem.lastChild);
+
+  // imprimindo o pai html da lista 1
+  let parentL1 = document.getElementsByTagName('ul')[0].parentElement;
+  console.log(parentL1);
+
+  //imprimindo todos os nós da lista 1
+  let nodesL1 = document.getElementsByTagName('ul')[0].childNodes;
+  for (let i=0;i<nodesL1.length ;i++){
+    console.log(nodesL1.item(i).textContent);
+  }
+  
+  // imprimindo os irmao do id=two
+  let eleTwo = document.getElementById('two');
+  let brother1 = eleTwo.previousSibling;
+  let brother2 = eleTwo.nextSibling;
+
+  console.log(brother1);
+  console.log(brother2);
+  
+
+</script>

@@ -1,43 +1,28 @@
-// const http = require('http');
-// const fs = require('fs');
-// const path = require('path');
 
-// const server = http.createServer((req, res) => {
-//     if (req.url === '/') {
-//         const directory = process.argv[2] || '.';
-//         fs.readdir(directory, (err, files) => {
-//             if (err) {
-//                 res.writeHead(500, { 'Content-Type': 'text/plain' });
-//                 res.end('Erro ao ler o diretorio');
-//                 return;
-//             }
-//             let fileList = '<ul>';
-//             files.forEach(file => {
-//                 fileList += `<li>${file}</li>`;
-//             });
-//             fileList += '</ul>';
-//             res.writeHead(200, { 'Content-Type': 'text/html' });
-//             res.end(`<h1>Conteúdo do diretorio ${directory}</h1>${fileList}`);
-//         });
-//     } else {
-//         res.writeHead(404, { 'Content-Type': 'text/plain' });
-//         res.end('Página não encontrada');
-//     }
-// });
+/* 
 
-// const port = 3333;
-// server.listen(port, () => {
-//     console.log(`Servidor rodando em http://localhost:${port}/`);
-// });
-
+*/
 const http = require('http');
 
-const files = ['file1.tx', 'file2.tx', 'file3.tx']
-
+const files = ['file1.txt', 'file2.txt', 'file3.txt', 'file4.txt']
 
 const server = http.createServer(function(req,res){
- res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
- res.write("Instituto de Computação");
- res.end();
+    const directory = process.argv[2];
+    fs.readdir(directory, function(err, files) {
+        if (err) {
+            res.writeHead(500, {"Content-Type": "text/plain"});
+            res.end(`Erro ao ler o diretório: ${err}`);
+            return;
+        }
+        res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+        files.forEach(file => {
+            res.write(`${file}<br>`) 
+        });
+        res.end();
+    });
 });
-server.listen(3333);
+
+const port = 3333;
+server.listen(port, function() {
+    console.log(`Servidor rodando em http://localhost:${port}/`);
+});

@@ -9,6 +9,9 @@ arquivos e subdiretórios do diretório informado
 
 /* PARTE 1*/
 const http = require('http');
+const dotenv = require("dotenv")
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
+
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3333;

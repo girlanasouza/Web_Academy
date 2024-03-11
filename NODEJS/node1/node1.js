@@ -1,11 +1,6 @@
-
-/* 
-Usando a função readdir do módulo fs, desenvolva um programa
-que aceita o nome de um diretório como parâmetro, e então cria
-um servidor Web capaz de retornar uma página contendo a lista de
-arquivos e subdiretórios do diretório informado
+/* Deixei em apenas duas funções pois pelo que eu entendi as partes faziam 
+conjunto incremental do resultado gerado :)
 */
-
 
 /* PARTE 1*/
 const http = require('http');

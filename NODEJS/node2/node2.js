@@ -1,21 +1,16 @@
-// Importações necessárias
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const { createLink } = require('./utils/createLinks'); // Importa a função createLink do módulo utils.js
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
+import { createLink } from './utils/createLinks.mjs';
+import dotenv from 'dotenv';
 
-// Configuração do dotenv para ler variáveis de ambiente
-const dotenv = require("dotenv");
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
-require('dotenv').config();
 
 const PORT = process.env.PORT || 3333;
 
-// Criação do servidor HTTP
 const server = http.createServer(function(req, res) {
-    const directory = process.argv[2]; // Diretório informado via linha de comando
+    const directory = process.argv[2];
 
-    // Verifica se está na raiz para listar arquivos ou em um arquivo específico para mostrar conteúdo
     if (req.url === '/') {
         fs.readdir(directory, function(err, files) {
             if (err) {
@@ -26,12 +21,11 @@ const server = http.createServer(function(req, res) {
 
             res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
             files.forEach(file => {
-                res.write(createLink(file)); // Certifique-se de que 'file' está definido corretamente
+                res.write(createLink(file)); 
             });
             res.end();
         });
     } else {
-        // Trata o caso de acessar um arquivo específico
         const filePath = path.join(directory, req.url);
         fs.readFile(filePath, function(err, data) {
             if (err) {
@@ -42,7 +36,6 @@ const server = http.createServer(function(req, res) {
 
             res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
             res.write(data);
-            // Adiciona um link para voltar à lista de arquivos
             res.write('<br><a href="/">Voltar</a>');
             res.end();
         });

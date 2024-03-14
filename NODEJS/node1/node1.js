@@ -1,41 +1,48 @@
-/* Deixei em apenas duas funções pois pelo que eu entendi as partes faziam 
-conjunto incremental do resultado gerado :)
-*/
-
-/* PARTE 1*/
 const http = require('http');
-const dotenv = require("dotenv")
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
+const fs = require('fs');
+const path = require('path');
+const { createLink } = require('./utils/createLinks');
 
+const dotenv = require("dotenv");
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3333;
-const fs = require('fs');
 
-const server = http.createServer(function(req,res){
+const server = http.createServer(function(req, res) {
     const directory = process.argv[2];
-    fs.readdir(directory, function(err, files) {
-        res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
-        files.forEach(file => {
-            res.write(`${file}<br>`); 
+
+    if (req.url === '/') {
+        fs.readdir(directory, function(err, files) {
+            if (err) {
+                res.writeHead(500, {"Content-Type": "text/html;charset=utf-8"});
+                res.end("Erro ao listar arquivos.");
+                return;
+            }
+
+            res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
+            files.forEach(file => {
+                res.write(createLink(file)); 
+            });
+            res.end();
         });
-        res.end();
-    });
+    } else {
+
+        const filePath = path.join(directory, req.url);
+        fs.readFile(filePath, function(err, data) {
+            if (err) {
+                res.writeHead(404, {"Content-Type": "text/html;charset=utf-8"});
+                res.end("Arquivo não encontrado.");
+                return;
+            }
+
+            res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
+            res.write(data);
+
+            res.write('<br><a href="/">Voltar</a>');
+            res.end();
+        });
+    }
 });
 
 server.listen(PORT);
-
-/* PARTE 2*/
-
-// const http = require('http');
-// require('dotenv').config();
-
-// const PORT = process.env.PORT || 3333;
-
-// const server = http.createServer(function (req, res) {
-//     res.writeHead(200, {"Content-Type":"text/html;charset=utf-8"});
-//     res.write("Instituto de Computação");
-//     res.end();
-// });
-
-// server.listen(PORT);

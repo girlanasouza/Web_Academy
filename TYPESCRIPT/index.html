@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Simple Counter</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    // Definição do componente de contador
+    class Counter extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = { count: 0 };
+        }
+
+        // Função para incrementar o contador
+        incrementCount = () => {
+            this.setState({ count: this.state.count + 1 });
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>Contador Simples</h1>
+                    <p>Contagem: {this.state.count}</p>
+                    <button onClick={this.incrementCount}>Incrementar</button>
+                </div>
+            );
+        }
+    }
+
+    // Renderização do componente na div com id "root"
+    ReactDOM.render(<Counter />, document.getElementById('root'));
+</script>
+
+</body>
+</html>

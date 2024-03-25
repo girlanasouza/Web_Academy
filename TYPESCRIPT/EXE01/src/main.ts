@@ -19,12 +19,38 @@ document.addEventListener('DOMContentLoaded', () => {
             const dataLimite = (document.getElementById('dataLimite') as HTMLInputElement).value;
             criarLembrete(titulo, dataLimite || undefined, descricao || undefined);
             limparFormulario();
+            atualizarListaLembretes();
+            esconderFormulario();
         });
     
-        atualizarListaLembretes();
+        
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const botaoCriarLembrete = document.getElementById('botaoCriarLembrete');
+    if (botaoCriarLembrete) {
+        botaoCriarLembrete.addEventListener('click', function() {
+            const form = document.getElementById('formularioLembrete');
+            if(form){
+                if (form.style.display === 'none') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            }
+        
+        });
+    } 
+});
+
+function esconderFormulario(){
+    const form = document.getElementById('formularioLembrete');
+    if (form){
+        form.style.display='none';
+    }
+
+}
 function limparFormulario() {
     (document.getElementById('titulo') as HTMLInputElement).value = '';
     (document.getElementById('descricao') as HTMLInputElement).value = '';
@@ -62,7 +88,7 @@ function exibirLembrete(lembrete: Lembrete): void {
     const titulo = document.createElement('h3');
     titulo.textContent = lembrete.titulo;
 
-    const dataInsercao = document.createElement('p');
+    const dataInsercao = document.createElement('p');   
     dataInsercao.textContent = `Data de inserção: ${lembrete.dataInsercao.toLocaleString()}`;
 
     const dataLimite = document.createElement('p');
@@ -147,6 +173,7 @@ function atualizarListaLembretes() {
     lembretes.forEach(lembrete => {
         exibirLembrete(lembrete);
     });
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {

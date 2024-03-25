@@ -1,6 +1,8 @@
 html, body {
     height: 100%;
     margin: 0;
+    /* overflow: hidden; */
+    
 }
 
 #content {
@@ -16,7 +18,10 @@ footer {
     text-align: center;
 }
 
-#imgYoda {
-    width: 100px;
-    height: 100px;
+
+
+
+#listaLembretes {
+    margin-top: 10px;
+    background-color: aquamarine;
 }

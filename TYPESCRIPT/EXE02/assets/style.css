@@ -2,21 +2,29 @@ html, body {
     height: 100%;
     margin: 0;
 }
-
-#content {
+#main-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 10vh;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+#main-container {
+    padding: 50px;
+}
+
+#estatisticasAluno {
+    margin-top: 10px;
+}
+#carro {
+    width: 500px;
 }
 
 footer {
     margin-top: auto;
-    background-color: #f8f9fa;
-    padding: 1rem 0;
-    text-align: center;
 }
 
-#imgYoda {
-    width: 100px;
-    height: 100px;
-}

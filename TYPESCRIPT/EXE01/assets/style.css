@@ -1,8 +1,6 @@
 html, body {
     height: 100vh;
     margin: 0;
-    /* overflow-x: hidden; */
-    
 }
 
 img, video {
@@ -14,28 +12,18 @@ img, video {
 #content {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Use Viewport Height (vh) instead of % to ensure it covers the full viewport height */
+    min-height: 100vh; 
 }
 
 hr {
     width: 100%;
 }
 
-/* footer {
-    margin-top: auto;
-    background-color: #f8f9fa;
-    padding: 1rem 0;
-    text-align: center;
-} */
-
 #criarLembrete-h5 {
     text-align: center;
 }
 
-
-
 #listaLembretes {
     margin-top: 10px;
     width: 100%;
-    /* background-color: aquamarine; */
 }

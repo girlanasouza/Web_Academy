@@ -11,87 +11,67 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Agenda de Lembretes</a>
-        <button id="botaoCriarLembrete" type="button" class="btn btn-primary">Criar Lembrete</button>
+        <a class="navbar-brand" href="#">Agenda de Lembretes de um Jovem Padawan</a>
+        <button id="botaoCriarLembrete" type="button" class="btn btn-info">Criar Lembrete</button>
     </div>
 </nav>
 
 <div class="container text-center mt-2">
     <div class="row">
       <div class="col">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="assets/imagens/c3po.jpeg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
+        <div class="card h-100" >
+            <img src="assets/imagens/c3po.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">C3PO</h5>
+                <p class="card-text">A negligência em realizar suas tarefas não lhe trará benefícios!</p>
             </div>
-          </div>
+        </div>
       </div>
       <div class="col">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="assets/imagens/c3po.jpeg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
+        <div class="card h-100">
+            <img src="assets/imagens/yoda.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Mestre Yoda</h5>
+                <p class="card-text">Esquecer de fazer suas coisas, você não deve!</p>
             </div>
-          </div>
+        </div>
       </div>
       <div class="col">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="assets/imagens/c3po.jpeg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
+        <div class="card h-100">
+            <img src="assets/imagens/chew.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Chew</h5>
+                <p class="card-text">Rrrrrrrrrrrrrrrrrrrrrrrrrooohh! Rrrrrrrrrrrrroooohh!</p>
             </div>
-          </div>
+        </div>
       </div>
     </div>
 </div>
 
+<div class="container mt-5 p-10" id="formularioLembrete" style="display: none;">
+    <form id="formLembrete">
+        <h5>Criar Novo Lembrete</h5>
+        <div class="form-group">            
+            <label for="titulo">Titulo do lembrete (obrigatorio)</label>
+            <input type="text" class="form-control" id="titulo" required>
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição do lembrete (opcional)</label>
+            <textarea class="form-control" id="descricao"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="dataLimite">Data Limite (opcional): </label>
+            <input type="date" class="form-control" id="dataLimite">
+        </div>
+        <button type="submit" id="botaoAdicionarLembrete" class="btn btn-success">Adicionar Lembrete</button>
+    </form>
+</div>
+
+<div class="container mt-5 p-10 w-100" id="listaLembretes">  
+
+</div>
 
 <div id="content" class="d-flex align-items-center justify-content-center" >
-    <div class="container mt-2 p-10" id="formularioLembrete" style="display: none;">
-        <form id="formLembrete">
-            <div class="form-group">
-                <label for="titulo">Titulo do lembrete (obrigatorio)</label>
-                <input type="text" class="form-control" id="titulo" required>
-            </div>
-            <div class="form-group">
-                <label for="descricao">Descrição do lembrete (opcional)</label>
-                <textarea class="form-control" id="descricao"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="dataLimite">Data Limite (opcional): </label>
-                <input type="date" class="form-control" id="dataLimite">
-            </div>
-            <button type="submit" id="botaoAdicionarLembrete" class="btn btn-primary">Adicionar Lembrete</button>
-        </form>
-    </div>
-
-    <div class="container mt-2 p-10" id="listaLembretes">
-           
-    </div>
     <!-- Modal -->
     <div class="modal fade" id="editarLembreteModal" tabindex="-1" role="dialog" aria-labelledby="editarLembreteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

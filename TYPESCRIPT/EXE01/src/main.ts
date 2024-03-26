@@ -73,19 +73,27 @@ function criarLembrete(titulo: string, dataLimite: string | undefined, descricao
     lembretes.push(novoLembrete);
     exibirLembrete(novoLembrete);
 }
-
 function exibirLembrete(lembrete: Lembrete): void {
     const listaLembretes = document.getElementById('listaLembretes');
     if (!listaLembretes) {
         console.error("Elemento listaLembretes não encontrado!");
         return;
     }
-
     const itemLembrete = document.createElement('div');
     itemLembrete.classList.add('lembrete');
     itemLembrete.dataset.id = lembrete.id.toString();
 
-    const titulo = document.createElement('h3');
+    const imagem = document.createElement('img');
+    imagem.src = 'assets/imagens/leia.jpeg'; // Substitua pelo caminho da sua imagem
+    imagem.classList.add('img-fluid', 'mr-3'); // Adicione a classe img-fluid do Bootstrap para tornar a imagem responsiva e a classe mr-3 para margem à direita
+    imagem.style.width = '100px'; // Define a largura da imagem como 100 pixels
+    imagem.style.height = '100px'; // Define a altura da imagem como 100 pixels
+
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    const titulo = document.createElement('h5');
+    titulo.classList.add('card-title');
     titulo.textContent = lembrete.titulo;
 
     const dataInsercao = document.createElement('p');   
@@ -99,7 +107,8 @@ function exibirLembrete(lembrete: Lembrete): void {
 
     const editarBtn = document.createElement('button');
     editarBtn.textContent = 'Editar';
-    editarBtn.classList.add('btn', 'btn-warning'); 
+    editarBtn.classList.add('btn', 'btn-warning');
+    editarBtn.style.marginLeft = '10px'; // Adiciona margem esquerda de 10 pixels
     editarBtn.addEventListener('click', () => editarLembrete(lembrete.id));
     
     const excluirBtn = document.createElement('button');
@@ -107,15 +116,78 @@ function exibirLembrete(lembrete: Lembrete): void {
     excluirBtn.classList.add('btn', 'btn-danger');
     excluirBtn.addEventListener('click', () => excluirLembrete(lembrete.id));
 
-    itemLembrete.appendChild(titulo);
-    itemLembrete.appendChild(dataInsercao);
-    itemLembrete.appendChild(dataLimite);
-    itemLembrete.appendChild(descricao);
-    itemLembrete.appendChild(editarBtn);
-    itemLembrete.appendChild(excluirBtn);
+    cardBody.appendChild(imagem); // Adiciona a imagem ao card body
+    cardBody.appendChild(titulo);
+    cardBody.appendChild(dataInsercao);
+    cardBody.appendChild(dataLimite);
+    cardBody.appendChild(descricao);
+    cardBody.appendChild(editarBtn);
+    cardBody.appendChild(excluirBtn);
 
-    listaLembretes.appendChild(itemLembrete);
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.appendChild(cardBody);
+
+    const col = document.createElement('div');
+    col.classList.add('col');
+    col.appendChild(card);
+
+    const row = document.createElement('div');
+    row.classList.add('row');
+    row.appendChild(col);
+
+    listaLembretes.appendChild(row);
 }
+
+// function exibirLembrete(lembrete: Lembrete): void {
+//     const listaLembretes = document.getElementById('listaLembretes');
+//     if (!listaLembretes) {
+//         console.error("Elemento listaLembretes não encontrado!");
+//         return;
+//     }
+//     const itemLembrete = document.createElement('div');
+//     itemLembrete.classList.add('lembrete');
+//     itemLembrete.dataset.id = lembrete.id.toString();
+
+//     const imagem = document.createElement('img');
+//     imagem.src = 'assets/imagens/leia.jpeg'; // Substitua pelo caminho da sua imagem
+//     imagem.classList.add('img-fluid', 'mr-3'); // Adicione a classe img-fluid do Bootstrap para tornar a imagem responsiva e a classe mr-3 para margem à direita
+//     imagem.style.width = '100px'; // Define a largura da imagem como 100 pixels
+//     imagem.style.height = '100px'; // Define a altura da imagem como 100 pixels
+
+
+//     const titulo = document.createElement('h3');
+//     titulo.textContent = lembrete.titulo;
+
+//     const dataInsercao = document.createElement('p');   
+//     dataInsercao.textContent = `Data de inserção: ${lembrete.dataInsercao.toLocaleString()}`;
+
+//     const dataLimite = document.createElement('p');
+//     dataLimite.textContent = lembrete.dataLimite ? `Data limite: ${lembrete.dataLimite.toLocaleString()}` : 'Data limite: N/A';
+
+//     const descricao = document.createElement('p');
+//     descricao.textContent = lembrete.descricao ? `Descrição: ${lembrete.descricao}` : 'Descrição: N/A';
+
+//     const editarBtn = document.createElement('button');
+//     editarBtn.textContent = 'Editar';
+//     editarBtn.classList.add('btn', 'btn-warning'); 
+//     editarBtn.addEventListener('click', () => editarLembrete(lembrete.id));
+    
+//     const excluirBtn = document.createElement('button');
+//     excluirBtn.textContent = 'Excluir';
+//     excluirBtn.classList.add('btn', 'btn-danger');
+//     excluirBtn.style.marginLeft = '10px';
+//     excluirBtn.addEventListener('click', () => excluirLembrete(lembrete.id));
+
+//     itemLembrete.appendChild(imagem); 
+//     itemLembrete.appendChild(titulo);
+//     itemLembrete.appendChild(dataInsercao);
+//     itemLembrete.appendChild(dataLimite);
+//     itemLembrete.appendChild(descricao);
+//     itemLembrete.appendChild(editarBtn);
+//     itemLembrete.appendChild(excluirBtn);
+//     listaLembretes.appendChild(itemLembrete);
+// }
 
 function editarLembrete(id: number): void {
     const lembrete = encontrarLembrete(id);

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Estatísticas da Turma</title>
+</head>
+<body>
+    <h1>Estatísticas da Turma</h1>
+
+    <form id="formAluno">
+        <input type="hidden" id="alunoId">
+        <input type="text" id="nomeCompleto" placeholder="Nome Completo">
+        <input type="number" id="idade" placeholder="Idade">
+        <input type="number" id="altura" placeholder="Altura (cm)">
+        <input type="number" id="peso" placeholder="Peso (kg)">
+        <button type="submit">Adicionar/Editar Aluno</button>
+    </form>
+
+    <button id="removerAluno">Remover Aluno</button>
+
+    <h2>Lista de Alunos</h2>
+    <div id="listaAlunos">
+        <!-- Os alunos adicionados aparecerão aqui -->
+    </div>
+    
+
+    <script src="build/main.js"></script>
+</body>
+</html>

@@ -86,11 +86,12 @@ function exibirLembrete(lembrete) {
     const editarBtn = document.createElement('button');
     editarBtn.textContent = 'Editar';
     editarBtn.classList.add('btn', 'btn-warning');
-    editarBtn.style.marginLeft = '10px';
+    editarBtn.style.marginLeft = '5px';
     editarBtn.addEventListener('click', () => editarLembrete(lembrete.id));
     const excluirBtn = document.createElement('button');
     excluirBtn.textContent = 'Excluir';
     excluirBtn.classList.add('btn', 'btn-danger');
+    excluirBtn.style.marginLeft = '10px';
     excluirBtn.addEventListener('click', () => excluirLembrete(lembrete.id));
     cardBody.appendChild(imagem);
     cardBody.appendChild(titulo);

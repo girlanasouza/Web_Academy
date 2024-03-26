@@ -84,10 +84,10 @@ function exibirLembrete(lembrete: Lembrete): void {
     itemLembrete.dataset.id = lembrete.id.toString();
 
     const imagem = document.createElement('img');
-    imagem.src = 'assets/imagens/leia.jpeg'; // Substitua pelo caminho da sua imagem
-    imagem.classList.add('img-fluid', 'mr-3'); // Adicione a classe img-fluid do Bootstrap para tornar a imagem responsiva e a classe mr-3 para margem à direita
-    imagem.style.width = '100px'; // Define a largura da imagem como 100 pixels
-    imagem.style.height = '100px'; // Define a altura da imagem como 100 pixels
+    imagem.src = 'assets/imagens/leia.jpeg'; 
+    imagem.classList.add('img-fluid', 'mr-3');
+    imagem.style.width = '100px';
+    imagem.style.height = '100px'; 
 
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
@@ -108,15 +108,16 @@ function exibirLembrete(lembrete: Lembrete): void {
     const editarBtn = document.createElement('button');
     editarBtn.textContent = 'Editar';
     editarBtn.classList.add('btn', 'btn-warning');
-    editarBtn.style.marginLeft = '10px'; // Adiciona margem esquerda de 10 pixels
+    editarBtn.style.marginLeft = '5px';
     editarBtn.addEventListener('click', () => editarLembrete(lembrete.id));
     
     const excluirBtn = document.createElement('button');
     excluirBtn.textContent = 'Excluir';
     excluirBtn.classList.add('btn', 'btn-danger');
+    excluirBtn.style.marginLeft = '10px';
     excluirBtn.addEventListener('click', () => excluirLembrete(lembrete.id));
 
-    cardBody.appendChild(imagem); // Adiciona a imagem ao card body
+    cardBody.appendChild(imagem); 
     cardBody.appendChild(titulo);
     cardBody.appendChild(dataInsercao);
     cardBody.appendChild(dataLimite);

@@ -1,4 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const chart_js_1 = require("chart.js");
+const bootstrap_1 = require("bootstrap");
 class Aluno {
     constructor(id, nomeCompleto, idade, altura, peso) {
         this.id = id;
@@ -18,6 +21,7 @@ function limparFormulario() {
 document.addEventListener('DOMContentLoaded', () => {
     const botaoCriarLembrete = document.getElementById('botaoCriarAluno');
     if (botaoCriarLembrete) {
+        console.log("botaos");
         botaoCriarLembrete.addEventListener('click', function () {
             const form = document.getElementById('formAluno');
             if (form) {
@@ -85,6 +89,7 @@ class Turma {
             alunoElement.appendChild(excluirBtn);
             alunoElement.appendChild(editarBtn);
             listaAlunosElement.appendChild(alunoElement);
+            this.atualizarGrafico();
         });
     }
     editarAluno(id) {
@@ -92,26 +97,30 @@ class Turma {
         if (index !== -1) {
             const aluno = this.alunos[index];
             const modalElement = document.getElementById('editarAlunoModal');
-            if (modalElement) {
-                console.log("editar dentro dentro dentro");
+            if (modalElement instanceof HTMLElement) {
                 document.getElementById('novoNomeCompleto').value = aluno.nomeCompleto;
                 document.getElementById('novaIdade').value = aluno.idade.toString();
                 document.getElementById('novaAltura').value = aluno.altura.toString();
                 document.getElementById('novoPeso').value = aluno.peso.toString();
-                const modal = new bootstrap.Modal(modalElement);
+                const modal = new bootstrap_1.Modal(modalElement);
                 modal.show();
                 const salvarEdicaoBtn = document.getElementById('salvarEdicaoBtn');
-                if (salvarEdicaoBtn) {
-                    salvarEdicaoBtn.addEventListener('click', () => {
-                        const novoNomeCompleto = document.getElementById('novoNomeCompleto').value;
-                        const novaIdade = parseInt(document.getElementById('novaIdade').value);
-                        const novaAltura = parseInt(document.getElementById('novaAltura').value);
-                        const novoPeso = parseFloat(document.getElementById('novoPeso').value);
-                        this.salvarEdicaoAluno(id, novoNomeCompleto, novaIdade, novaAltura, novoPeso);
-                        this.atualizarEstatisticas();
-                        this.atualizarListaAlunos();
-                        modal.hide();
-                    });
+                if (salvarEdicaoBtn instanceof HTMLElement) {
+                    if (this.listenerSalvarEdicao) {
+                        this.listenerSalvarEdicao();
+                        salvarEdicaoBtn.removeEventListener('click', this.listenerSalvarEdicao);
+                        this.listenerSalvarEdicao = () => {
+                            const novoNomeCompleto = document.getElementById('novoNomeCompleto').value;
+                            const novaIdade = parseInt(document.getElementById('novaIdade').value);
+                            const novaAltura = parseFloat(document.getElementById('novaAltura').value);
+                            const novoPeso = parseFloat(document.getElementById('novoPeso').value);
+                            this.salvarEdicaoAluno(id, novoNomeCompleto, novaIdade, novaAltura, novoPeso);
+                            this.atualizarEstatisticas();
+                            this.atualizarListaAlunos();
+                            modal.hide();
+                        };
+                        salvarEdicaoBtn.addEventListener('click', this.listenerSalvarEdicao);
+                    }
                 }
             }
         }
@@ -164,6 +173,48 @@ class Turma {
         const medPesosElement = document.getElementById('medPesos');
         if (medPesosElement) {
             medPesosElement.textContent = `Média de Pesos: ${this.getMediaPesos().toFixed(2)} kg`;
+        }
+    }
+    atualizarGrafico() {
+        const canvasElement = document.getElementById('meuGrafico');
+        if (canvasElement) {
+            const ctx = canvasElement.getContext('2d');
+            if (ctx) {
+                if (!this.grafico) {
+                    this.grafico = new chart_js_1.Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ["Idade", "Altura", "Peso"],
+                            datasets: [{
+                                    label: 'Médias dos Alunos',
+                                    data: [this.getMediaIdades(), this.getMediaAlturas(), this.getMediaPesos()],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+                else {
+                    this.grafico.data.datasets[0].data = [this.getMediaIdades(), this.getMediaAlturas(), this.getMediaPesos()];
+                    this.grafico.update();
+                }
+            }
         }
     }
 }

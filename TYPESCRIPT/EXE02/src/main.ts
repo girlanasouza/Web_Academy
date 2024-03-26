@@ -1,10 +1,14 @@
+import { Chart } from 'chart.js';
+import { Modal } from 'bootstrap';
+
 class Aluno {
     constructor(
         public id: number,
         public nomeCompleto: string,
         public idade: number,
         public altura: number,
-        public peso: number
+        public peso: number,
+
     ) {}
 }
 
@@ -20,6 +24,7 @@ function limparFormulario() {
 document.addEventListener('DOMContentLoaded', () => {
     const botaoCriarLembrete = document.getElementById('botaoCriarAluno');
     if (botaoCriarLembrete) {
+        console.log("botaos")
         botaoCriarLembrete.addEventListener('click', function () {
             const form = document.getElementById('formAluno');
             if (form) {
@@ -52,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class Turma {
     private alunos: Aluno[] = [];
+    private grafico?: Chart;
+    private listenerSalvarEdicao?: () => void;
+
 
     constructor(public id: number, public nome: string) {}
 
@@ -92,37 +100,52 @@ class Turma {
             alunoElement.appendChild(excluirBtn);
             alunoElement.appendChild(editarBtn);
             listaAlunosElement.appendChild(alunoElement);
+            this.atualizarGrafico();
         });
     }
-    editarAluno(id:number) {
+    editarAluno(id: number) {
         const index = this.alunos.findIndex(aluno => aluno.id === id);
         if (index !== -1) {
             const aluno = this.alunos[index];
             const modalElement = document.getElementById('editarAlunoModal');
-            if (modalElement) {
-                console.log("editar dentro dentro dentro");
+            if (modalElement instanceof HTMLElement) { // Assegura que modalElement é um HTMLElement
                 (document.getElementById('novoNomeCompleto') as HTMLInputElement).value = aluno.nomeCompleto;
                 (document.getElementById('novaIdade') as HTMLInputElement).value = aluno.idade.toString();
                 (document.getElementById('novaAltura') as HTMLInputElement).value = aluno.altura.toString();
                 (document.getElementById('novoPeso') as HTMLInputElement).value = aluno.peso.toString();
-                const modal = new bootstrap.Modal(modalElement);
+    
+                const modal = new Modal(modalElement); // Utiliza a importação do Modal corretamente
                 modal.show();
+    
                 const salvarEdicaoBtn = document.getElementById('salvarEdicaoBtn');
-                if (salvarEdicaoBtn) {
-                    salvarEdicaoBtn.addEventListener('click', () => {
-                        const novoNomeCompleto = (document.getElementById('novoNomeCompleto') as HTMLInputElement).value;
-                        const novaIdade = parseInt((document.getElementById('novaIdade') as HTMLInputElement).value);
-                        const novaAltura = parseInt((document.getElementById('novaAltura') as HTMLInputElement).value);
-                        const novoPeso = parseFloat((document.getElementById('novoPeso') as HTMLInputElement).value);
-                        this.salvarEdicaoAluno(id, novoNomeCompleto, novaIdade, novaAltura, novoPeso);
-                        this.atualizarEstatisticas();
-                        this.atualizarListaAlunos();
-                        modal.hide();
-                    });
+                if (salvarEdicaoBtn instanceof HTMLElement) { // Assegura que salvarEdicaoBtn é um HTMLElement
+                    if (this.listenerSalvarEdicao) {
+                        this.listenerSalvarEdicao();
+                    
+                    
+                        salvarEdicaoBtn.removeEventListener('click', this.listenerSalvarEdicao); // Remove o listener anterior para evitar duplicatas
+                        this.listenerSalvarEdicao = () => {
+                            const novoNomeCompleto = (document.getElementById('novoNomeCompleto') as HTMLInputElement).value;
+                            const novaIdade = parseInt((document.getElementById('novaIdade') as HTMLInputElement).value);
+                            const novaAltura = parseFloat((document.getElementById('novaAltura') as HTMLInputElement).value); // Usar parseFloat para altura
+                            const novoPeso = parseFloat((document.getElementById('novoPeso') as HTMLInputElement).value);
+        
+                            this.salvarEdicaoAluno(id, novoNomeCompleto, novaIdade, novaAltura, novoPeso);
+                            this.atualizarEstatisticas();
+                            this.atualizarListaAlunos();
+                            modal.hide();
+                        };
+                    
+                        salvarEdicaoBtn.addEventListener('click', this.listenerSalvarEdicao); // Adiciona o novo listener
+                    }
                 }
             }
         }
     }
+    
+    // Fora da classe Turma, adicione esta linha se não existir
+     // Adicione isto na classe se estiver usando TypeScript
+    
     salvarEdicaoAluno(id:number, nomeCompleto: string,  idade: number, altura: number, peso: number) {
         const aluno = turma.alunos.find(aluno => aluno.id === id);
         if (aluno) {
@@ -177,6 +200,53 @@ class Turma {
             medPesosElement.textContent = `Média de Pesos: ${this.getMediaPesos().toFixed(2)} kg`;
         }
     }
+    atualizarGrafico() {
+        const canvasElement = document.getElementById('meuGrafico') as HTMLCanvasElement;
+        if (canvasElement) {
+            const ctx = canvasElement.getContext('2d');
+            if (ctx) {
+                // Verifica se o gráfico já existe
+                if (!this.grafico) {
+                    // Se não existir, cria um novo gráfico
+                    this.grafico = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ["Idade", "Altura", "Peso"],
+                            datasets: [{
+                                label: 'Médias dos Alunos',
+                                data: [this.getMediaIdades(), this.getMediaAlturas(), this.getMediaPesos()],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    // Se o gráfico já existir, atualiza os dados
+                    this.grafico.data.datasets[0].data = [this.getMediaIdades(), this.getMediaAlturas(), this.getMediaPesos()];
+                    this.grafico.update();
+                }
+            }
+        }
+    }
+    
+   
+    
     
 }
 

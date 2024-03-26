@@ -48,9 +48,12 @@
     </div>
 </div>
 
-<div class="container mt-5 p-10" id="formularioLembrete" style="display: none;">
+
+<!-- FORMULARIO -->
+<div class="container mt-3 p-20" id="formularioLembrete" style="display: none;">
+    <hr>
     <form id="formLembrete">
-        <h5>Criar Novo Lembrete</h5>
+        <h5 id="criarLembrete-h5">Criar Novo Lembrete</h5>
         <div class="form-group">            
             <label for="titulo">Titulo do lembrete (obrigatorio)</label>
             <input type="text" class="form-control" id="titulo" required>
@@ -68,13 +71,13 @@
 </div>
 
 <!-- OS LEMBRETES SERÃO ADICIONADOS AQUI -->
-<div class="container mt-5 w-100" id="listaLembretes">  
+<div class="container-fluid mt-5 w-100" id="listaLembretes">  
     
 
 </div>
 
+<!-- MODAL PARA EDICAO DO LEMBRETE -->
 <div id="content" class="d-flex align-items-center justify-content-center" >
-    <!-- Modal -->
     <div class="modal fade" id="editarLembreteModal" tabindex="-1" role="dialog" aria-labelledby="editarLembreteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -106,14 +109,14 @@
         </div>
     </div>
 </div>
+
+<!-- FOOTER -->
 <footer class="text-center mt-2 bg-dark" style="color: white;">
     <div class="container">
         <p>© 2024 Agenda de Lembretes</p>
     </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-
 <script src="build/main.js"></script>
 </body>
 </html>

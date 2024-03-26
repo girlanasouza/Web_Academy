@@ -64,16 +64,9 @@ function exibirLembrete(lembrete) {
         console.error("Elemento listaLembretes não encontrado!");
         return;
     }
-    const itemLembrete = document.createElement('div');
-    itemLembrete.classList.add('lembrete');
-    itemLembrete.dataset.id = lembrete.id.toString();
-    const imagem = document.createElement('img');
-    imagem.src = 'assets/imagens/leia.jpeg';
-    imagem.classList.add('img-fluid', 'mr-3');
-    imagem.style.width = '100px';
-    imagem.style.height = '100px';
     const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
+    cardBody.classList.add('card-body', 'd-flex', 'align-items-center', 'justify-content-between');
+    const textoContainer = document.createElement('div');
     const titulo = document.createElement('h5');
     titulo.classList.add('card-title');
     titulo.textContent = lembrete.titulo;
@@ -83,23 +76,27 @@ function exibirLembrete(lembrete) {
     dataLimite.textContent = lembrete.dataLimite ? `Data limite: ${lembrete.dataLimite.toLocaleString()}` : 'Data limite: N/A';
     const descricao = document.createElement('p');
     descricao.textContent = lembrete.descricao ? `Descrição: ${lembrete.descricao}` : 'Descrição: N/A';
+    textoContainer.appendChild(titulo);
+    textoContainer.appendChild(dataInsercao);
+    textoContainer.appendChild(dataLimite);
+    textoContainer.appendChild(descricao);
+    const imagem = document.createElement('img');
+    imagem.src = 'assets/imagens/leia.jpeg';
+    imagem.classList.add('img-fluid', 'ml-3');
+    imagem.style.maxWidth = '25vw';
+    imagem.style.maxHeight = '25vh';
+    cardBody.appendChild(textoContainer);
+    cardBody.appendChild(imagem);
     const editarBtn = document.createElement('button');
     editarBtn.textContent = 'Editar';
-    editarBtn.classList.add('btn', 'btn-warning');
-    editarBtn.style.marginLeft = '5px';
+    editarBtn.classList.add('btn', 'btn-warning', 'ml-2');
     editarBtn.addEventListener('click', () => editarLembrete(lembrete.id));
     const excluirBtn = document.createElement('button');
     excluirBtn.textContent = 'Excluir';
-    excluirBtn.classList.add('btn', 'btn-danger');
-    excluirBtn.style.marginLeft = '10px';
+    excluirBtn.classList.add('btn', 'btn-danger', 'ml-2');
     excluirBtn.addEventListener('click', () => excluirLembrete(lembrete.id));
-    cardBody.appendChild(imagem);
-    cardBody.appendChild(titulo);
-    cardBody.appendChild(dataInsercao);
-    cardBody.appendChild(dataLimite);
-    cardBody.appendChild(descricao);
-    cardBody.appendChild(editarBtn);
-    cardBody.appendChild(excluirBtn);
+    textoContainer.appendChild(editarBtn);
+    textoContainer.appendChild(excluirBtn);
     const card = document.createElement('div');
     card.classList.add('card');
     card.appendChild(cardBody);
@@ -135,6 +132,10 @@ function editarLembrete(id) {
         }
     }
 }
+function excluirLembrete(id) {
+    lembretes = lembretes.filter(lembrete => lembrete.id !== id);
+    atualizarListaLembretes();
+}
 function salvarEdicaoLembrete(id, titulo, dataLimite, descricao, dataInsercao) {
     const lembrete = encontrarLembrete(id);
     if (lembrete) {
@@ -142,13 +143,6 @@ function salvarEdicaoLembrete(id, titulo, dataLimite, descricao, dataInsercao) {
         lembrete.descricao = descricao || undefined;
         lembrete.dataLimite = dataLimite ? new Date(dataLimite) : undefined;
         lembrete.dataInsercao = dataInsercao;
-    }
-}
-function excluirLembrete(id) {
-    lembretes = lembretes.filter(lembrete => lembrete.id !== id);
-    const itemLembrete = document.querySelector(`.lembrete[data-id="${id}"]`);
-    if (itemLembrete) {
-        itemLembrete.remove();
     }
 }
 function encontrarLembrete(id) {

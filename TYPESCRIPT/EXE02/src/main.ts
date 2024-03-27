@@ -11,41 +11,41 @@ class Aluno {
 let lastId: number = 0;
 
 function limparFormulario() {
-    (document.getElementById('nomeCompleto') as HTMLInputElement).value = '';
-    (document.getElementById('idade') as HTMLInputElement).value = '';
-    (document.getElementById('altura') as HTMLInputElement).value = '';
-    (document.getElementById('peso') as HTMLInputElement).value = '';
+    (document.getElementById('nomeCompletoModal') as HTMLInputElement).value = '';
+    (document.getElementById('idadeModal') as HTMLInputElement).value = '';
+    (document.getElementById('alturaModal') as HTMLInputElement).value = '';
+    (document.getElementById('pesoModal') as HTMLInputElement).value = '';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const botaoCriarLembrete = document.getElementById('botaoCriarAluno');
-    if (botaoCriarLembrete) {
-        botaoCriarLembrete.addEventListener('click', function () {
-            const form = document.getElementById('formAluno');
-            if (form) {
-                if (form.style.display === 'none') {
-                    form.style.display = 'block';
-                }
-                else {
-                    form.style.display = 'none';
-                }
-            }
-        });
-    }
-});
+    const formModal = document.getElementById('formAlunoModal');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('formAluno');
-    if (form) {
-        form.addEventListener('submit', function (event) {
+    if (formModal) {
+        formModal.addEventListener('submit', function (event) {
             event.preventDefault();
-            const nomeCompleto = (document.getElementById('nomeCompleto') as HTMLInputElement).value;
-            const idade = (document.getElementById('idade') as HTMLInputElement).value;
-            const altura = (document.getElementById('altura') as HTMLInputElement).value;
-            const peso = (document.getElementById('peso') as HTMLInputElement).value;
-            const novoAluno = new Aluno(++lastId, nomeCompleto, parseInt(idade), parseFloat(altura), parseFloat(peso));
-            turma.adicionarAluno(novoAluno);
+            const nomeCompletoElement = document.getElementById('nomeCompletoModal') as HTMLInputElement;
+            const idadeElement =  document.getElementById('idadeModal') as HTMLInputElement;
+            const alturaElement = document.getElementById('alturaModal') as HTMLInputElement;
+            const pesoElement = document.getElementById('pesoModal') as HTMLInputElement;
+            if (nomeCompletoElement && idadeElement && alturaElement && pesoElement) {
+                const nomeCompleto= nomeCompletoElement.value;
+                const idade = idadeElement.value;
+                const altura = alturaElement.value;
+                const peso = pesoElement.value;
+
+
+                const novoAluno = new Aluno(++lastId, nomeCompleto, parseInt(idade), parseFloat(altura), parseFloat(peso));
+                turma.adicionarAluno(novoAluno);
+            }
+
             limparFormulario();
+
+            const modal = document.getElementById('modalAluno');
+            if (modal) {
+                const modalElement = bootstrap.Modal.getInstance(modal);
+                if (modalElement) modalElement.hide();
+            }
+            
         });
     }
 });
@@ -121,6 +121,7 @@ class Turma {
             excluirBtn.textContent = 'Excluir';
             excluirBtn.classList.add('btn', 'btn-danger', 'mx-1');
             excluirBtn.addEventListener('click', () => {
+                lastId-=1;
                 this.removerAluno(aluno.id);
                 this.atualizarListaAlunos();
             });

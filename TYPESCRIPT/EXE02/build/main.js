@@ -10,39 +10,35 @@ class Aluno {
 }
 let lastId = 0;
 function limparFormulario() {
-    document.getElementById('nomeCompleto').value = '';
-    document.getElementById('idade').value = '';
-    document.getElementById('altura').value = '';
-    document.getElementById('peso').value = '';
+    document.getElementById('nomeCompletoModal').value = '';
+    document.getElementById('idadeModal').value = '';
+    document.getElementById('alturaModal').value = '';
+    document.getElementById('pesoModal').value = '';
 }
 document.addEventListener('DOMContentLoaded', () => {
-    const botaoCriarLembrete = document.getElementById('botaoCriarAluno');
-    if (botaoCriarLembrete) {
-        botaoCriarLembrete.addEventListener('click', function () {
-            const form = document.getElementById('formAluno');
-            if (form) {
-                if (form.style.display === 'none') {
-                    form.style.display = 'block';
-                }
-                else {
-                    form.style.display = 'none';
-                }
-            }
-        });
-    }
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('formAluno');
-    if (form) {
-        form.addEventListener('submit', function (event) {
+    const formModal = document.getElementById('formAlunoModal');
+    if (formModal) {
+        formModal.addEventListener('submit', function (event) {
             event.preventDefault();
-            const nomeCompleto = document.getElementById('nomeCompleto').value;
-            const idade = document.getElementById('idade').value;
-            const altura = document.getElementById('altura').value;
-            const peso = document.getElementById('peso').value;
-            const novoAluno = new Aluno(++lastId, nomeCompleto, parseInt(idade), parseFloat(altura), parseFloat(peso));
-            turma.adicionarAluno(novoAluno);
+            const nomeCompletoElement = document.getElementById('nomeCompletoModal');
+            const idadeElement = document.getElementById('idadeModal');
+            const alturaElement = document.getElementById('alturaModal');
+            const pesoElement = document.getElementById('pesoModal');
+            if (nomeCompletoElement && idadeElement && alturaElement && pesoElement) {
+                const nomeCompleto = nomeCompletoElement.value;
+                const idade = idadeElement.value;
+                const altura = alturaElement.value;
+                const peso = pesoElement.value;
+                const novoAluno = new Aluno(++lastId, nomeCompleto, parseInt(idade), parseFloat(altura), parseFloat(peso));
+                turma.adicionarAluno(novoAluno);
+            }
             limparFormulario();
+            const modal = document.getElementById('modalAluno');
+            if (modal) {
+                const modalElement = bootstrap.Modal.getInstance(modal);
+                if (modalElement)
+                    modalElement.hide();
+            }
         });
     }
 });
@@ -103,6 +99,7 @@ class Turma {
             excluirBtn.textContent = 'Excluir';
             excluirBtn.classList.add('btn', 'btn-danger', 'mx-1');
             excluirBtn.addEventListener('click', () => {
+                lastId -= 1;
                 this.removerAluno(aluno.id);
                 this.atualizarListaAlunos();
             });

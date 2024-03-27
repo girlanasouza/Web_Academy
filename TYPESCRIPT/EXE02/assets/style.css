@@ -20,6 +20,9 @@ img, video {
 #estatisticasAluno {
     margin-top: 10px;
 }
+#lista-alunos-result {
+    margin-top: 10px;
+}
 
 #listaAlunos {
     margin-top: 10px;
@@ -27,6 +30,11 @@ img, video {
 #carro {
     width: 500px;
 }
+
+.custom-table {
+    background-color: blue; /* Cor de fundo azul */
+}
+
 
 footer {
     margin-top: auto;

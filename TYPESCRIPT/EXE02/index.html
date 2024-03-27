@@ -61,7 +61,7 @@
             </div>
             
             <div class="mb-3">
-                <label for="peso" class="form-label">Altura</label>
+                <label for="peso" class="form-label">Peso</label>
                 <input type="number" class="form-control" id="peso" placeholder="Peso (kg)" required>
             </div>
 
@@ -69,15 +69,17 @@
         </form>
     </div>
 
-
-    <div id="listaAlunos">
-        <h2>Lista de Alunos</h2>
-        <ul class="list-group">
-            <li class="list-group-item p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">Sem Nenhum Aluno</li>
-            
-        </ul>
+    <div id="lista-alunos-result">
+        <div class="h2 pb-2 mb-4 text-primary border-bottom border-primary">
+            Lista dos Alunos
+        </div>
+        <div id="listaAlunos">
+            <ul class="list-group">
+                <li class="list-group-item p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">Sem Nenhum Aluno</li>
+                
+            </ul>
+        </div>
     </div>
-
     <!-- MODAL PARA EDICAO DO LEMBRETE -->
     <div id="content" class="d-flex align-items-center justify-content-center" >
         <div class="modal fade" id="editarAlunoModal" tabindex="-1" role="dialog" aria-labelledby="editarAlunoModalLabel" aria-hidden="true">
@@ -117,14 +119,60 @@
     </div>
 
    <!-- ESTATISTICAS DOS ALUNOS -->
-    <div id="estatisticasAluno">
-        <h2>Estatísticas de Alunos</h2>
-        <ul class="list-group">
-            <li id="nrAlunos" class="list-group-item p-3 text-primary-emphasis bg-primary-subtle rounded-3">Número de Alunos: 0</li>
-            <li id="medIdades" class="list-group-item p-3 text-primary-emphasis bg-primary-subtle rounded-3">Média de Idades: 0.0</li>
-            <li id="medAlturas" class="list-group-item p-3 text-primary-emphasis bg-primary-subtle rounded-3">Média de Alturas: 0.0</li>
-            <li id="medPesos" class="list-group-item p-3 text-primary-emphasis bg-primary-subtle rounded-3">Média de Pesos: 0.0</li>
-        </ul>
+    <div id="estatisticasAluno">        
+        <div class="h2 pb-2 mb-4 text-primary border-bottom border-primary">
+            Estatísticas de Alunos
+        </div>
+        <div class="p-3 bg-opacity-10 border border-info rounded-end">
+            <div class="container text-center">
+                <div class="row align-items-start">
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/imagens/people.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Número de Alunos</h5>
+                          <p class="card-text" id="nrAlunos"></p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/imagens/age.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Média de Idades</h5>
+                          <p class="card-text" id="medIdades"></p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/imagens/height.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Média de Alturas</h5>
+                          <p class="card-text" id="medAlturas"></p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/imagens/weight.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Média de Pesos</h5>
+                          <p class="card-text" id="medPesos"></p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+
+            <!-- <ul class="list-group">
+                <li id="nrAlunos" class="list-group-item">Número de Alunos: 0</li>
+                <li id="medIdades" class="list-group-item">Média de Idades: 0.0</li>
+                <li id="medAlturas" class="list-group-item">Média de Alturas: 0.0</li>
+                <li id="medPesos" class="list-group-item">Média de Pesos: 0.0</li>
+            </ul> -->
+        </div>
     </div>
     <div id="graficoEstatisticas" class="container mt-4">
         <canvas id="meuGrafico"></canvas>

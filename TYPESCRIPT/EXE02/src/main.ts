@@ -63,12 +63,8 @@ class Turma {
 
     private atualizarListaAlunos(): void {
         const table = document.createElement('table');
-        table.classList.add('table', 'table-striped', 'table-hover');
-    
-        // Add caption (title) to the table
-        const caption = document.createElement('caption');
-        caption.textContent = 'Lista de Alunos';
-        table.appendChild(caption);
+        // table.classList.add('table', 'table-striped', 'table-hover', 'custom-table');
+        table.classList.add('table', 'table-striped', 'table-hover', 'custom-table'); // Adicionando a classe custom-table
 
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
@@ -77,14 +73,13 @@ class Turma {
         headers.forEach(headerText => {
             const header = document.createElement('th');
             header.textContent = headerText;
-            header.scope = 'col'; // Accessibility: define scope as column header
+            header.scope = 'col'; 
             headerRow.appendChild(header);
         });
 
-        // Action column header
         const actionHeader = document.createElement('th');
         actionHeader.textContent = 'Ações';
-        actionHeader.scope = 'col'; // Accessibility: define scope as column header
+        actionHeader.scope = 'col'; 
         headerRow.appendChild(actionHeader);
 
         thead.appendChild(headerRow);
@@ -95,7 +90,7 @@ class Turma {
     
         const container = document.getElementById('listaAlunos');
         if (!container) return;
-        container.innerHTML = ''; // Clear previous content
+        container.innerHTML = ''; 
     
         this.alunos.forEach(aluno => {
             const row = document.createElement('tr');

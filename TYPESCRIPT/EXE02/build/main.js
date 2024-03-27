@@ -59,10 +59,7 @@ class Turma {
     }
     atualizarListaAlunos() {
         const table = document.createElement('table');
-        table.classList.add('table', 'table-striped', 'table-hover');
-        const caption = document.createElement('caption');
-        caption.textContent = 'Lista de Alunos';
-        table.appendChild(caption);
+        table.classList.add('table', 'table-striped', 'table-hover', 'custom-table');
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
         const headers = ['Id', 'Nome', 'Idade', 'Altura', 'Peso'];

@@ -1,10 +1,15 @@
 {
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
-    "@types/jquery": "^3.5.29"
+    "@types/express": "^4.17.21",
+    "@types/jquery": "^3.5.29",
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.2"
+    "chart.js": "^4.4.2",
+    "express": "^4.19.2"
   }
 }

@@ -105,10 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
 });
 
-
 class TV implements Product {
     constructor (
-        // public id: number,
         public modelo :string,
         public fabricante:string,
         public valor:number,
@@ -119,7 +117,6 @@ class TV implements Product {
 
 class Celular implements Product {
     constructor(
-        // public id: number,
         public modelo :string,
         public fabricante:string,
         public valor:number,
@@ -129,7 +126,6 @@ class Celular implements Product {
 
 class Bicicleta implements Product {
     constructor(
-        // public id: number,
         public modelo :string,
         public fabricante:string,
         public valor:number,

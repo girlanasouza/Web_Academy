@@ -1,10 +1,4 @@
-interface Lembrete {
-    id: number;
-    titulo: string;
-    dataInsercao: Date;
-    dataLimite?: Date;
-    descricao?: string;
-}
+type Lembrete = [id: number, titulo: string, dataInsercao: Date, dataLimite?: Date, descricao?: string];
 
 let lembretes: Lembrete[] = [];
 let lastId = 0;
@@ -36,17 +30,17 @@ function criarLembrete(titulo: string, dataLimite: string | undefined, descricao
         console.error("Necessário adicionar um título!!!");
         return;
     }
-    const novoLembrete: Lembrete = {
-        id: ++lastId,
+    const novoLembrete: Lembrete = [
+        ++lastId,
         titulo,
-        dataInsercao: new Date(),
-        descricao: descricao || undefined,
-        dataLimite: dataLimite ? new Date(dataLimite) : undefined,
-    };
+        new Date(),
+        dataLimite ? new Date(dataLimite) : undefined,
+        descricao
+    ];
     lembretes.push(novoLembrete);
     exibirLembrete(novoLembrete);
-    
 }
+
 
 
 function exibirLembrete(lembrete:Lembrete) {
@@ -62,16 +56,16 @@ function exibirLembrete(lembrete:Lembrete) {
 
     const titulo = document.createElement('h5');
     titulo.classList.add('card-title');
-    titulo.textContent = lembrete.titulo;
+    titulo.textContent = lembrete[1];
 
     const dataInsercao = document.createElement('p');   
-    dataInsercao.textContent = `Data de inserção: ${lembrete.dataInsercao.toLocaleString()}`;
-
+    dataInsercao.textContent = `Data de inserção: ${lembrete[2].toLocaleString()}`; // Usando o índice correto [2] para dataInsercao
+    
     const dataLimite = document.createElement('p');
-    dataLimite.textContent = lembrete.dataLimite ? `Data limite: ${lembrete.dataLimite.toLocaleString()}` : 'Data limite: N/A';
-
+    dataLimite.textContent = lembrete[3] ? `Data limite: ${lembrete[3].toLocaleString()}` : 'Data limite: N/A'; // Índice [3] está correto para dataLimite
+    
     const descricao = document.createElement('p');
-    descricao.textContent = lembrete.descricao ? `Descrição: ${lembrete.descricao}` : 'Descrição: N/A';
+    descricao.textContent = lembrete[4] ? `Descrição: ${lembrete[4]}` : 'Descrição: N/A';
     
     textoContainer.appendChild(titulo);
     textoContainer.appendChild(dataInsercao);
@@ -90,12 +84,12 @@ function exibirLembrete(lembrete:Lembrete) {
     const editarBtn = document.createElement('button');
     editarBtn.textContent = 'Editar';
     editarBtn.classList.add('btn', 'btn-warning', 'ml-2');
-    editarBtn.addEventListener('click', () => editarLembrete(lembrete.id));
+    editarBtn.addEventListener('click', () => editarLembrete(lembrete[0]));
 
     const excluirBtn = document.createElement('button');
     excluirBtn.textContent = 'Excluir';
     excluirBtn.classList.add('btn', 'btn-danger', 'ml-2');
-    excluirBtn.addEventListener('click', () => excluirLembrete(lembrete.id));
+    excluirBtn.addEventListener('click', () => excluirLembrete(lembrete[0]));
 
     textoContainer.appendChild(editarBtn);
     textoContainer.appendChild(excluirBtn);
@@ -120,9 +114,9 @@ function editarLembrete(id: number): void {
     if (lembrete) {
         const modalElement = document.getElementById('editarLembreteModal');
         if (modalElement) {
-            (document.getElementById('novoTitulo') as HTMLInputElement).value = lembrete.titulo || '';
-            (document.getElementById('novaDescricao') as HTMLInputElement).value = lembrete.descricao || '';
-            (document.getElementById('novaDataLimite') as HTMLInputElement).value = lembrete.dataLimite ? lembrete.dataLimite.toISOString().substring(0, 10) : '';
+            (document.getElementById('novoTitulo') as HTMLInputElement).value = lembrete[1] || '';
+            (document.getElementById('novaDescricao') as HTMLInputElement).value = lembrete[4] || '';
+            (document.getElementById('novaDataLimite') as HTMLInputElement).value = lembrete[3] ? lembrete[3].toISOString().substring(0, 10) : '';
             const modal = new bootstrap.Modal(modalElement);
             modal.show();
             const salvarEdicaoBtn = document.getElementById('salvarEdicaoBtn');
@@ -131,7 +125,7 @@ function editarLembrete(id: number): void {
                     const novoTitulo = (document.getElementById('novoTitulo') as HTMLInputElement).value;
                     const novaDescricao = (document.getElementById('novaDescricao') as HTMLInputElement).value;
                     const novaDataLimite = (document.getElementById('novaDataLimite') as HTMLInputElement).value;
-                    salvarEdicaoLembrete(id, novoTitulo, novaDataLimite, novaDescricao, lembrete.dataInsercao);
+                    salvarEdicaoLembrete(id, novoTitulo, novaDataLimite, novaDescricao, lembrete[2]);
                     atualizarListaLembretes();
                     modal.hide();
                 });
@@ -141,22 +135,22 @@ function editarLembrete(id: number): void {
 }
 
 function excluirLembrete(id: number): void {
-    lembretes = lembretes.filter(lembrete => lembrete.id !== id);
+    lembretes = lembretes.filter(lembrete => lembrete[0] !== id);
     atualizarListaLembretes();
 }
 
 function salvarEdicaoLembrete(id: number, titulo: string, dataLimite: string, descricao: string, dataInsercao: Date) {
     const lembrete = encontrarLembrete(id);
     if (lembrete) {
-        lembrete.titulo = titulo;
-        lembrete.descricao = descricao || undefined;
-        lembrete.dataLimite = dataLimite ? new Date(dataLimite) : undefined;
-        lembrete.dataInsercao = dataInsercao;
+        lembrete[1] = titulo;
+        lembrete[4] = descricao || undefined;
+        lembrete[3] = dataLimite ? new Date(dataLimite) : undefined;
+        lembrete[2] = dataInsercao;
     }
 }
 
 function encontrarLembrete(id: number): Lembrete | undefined {
-    return lembretes.find(lembrete => lembrete.id === id);
+    return lembretes.find(lembrete => lembrete[0] === id);
 }
 
 function atualizarListaLembretes() {

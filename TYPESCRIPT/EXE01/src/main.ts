@@ -10,9 +10,9 @@ let lembretes: Lembrete[] = [];
 let lastId = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('formLembrete');
-    if (form) {
-        form.addEventListener('submit', function(event) {
+    const formModalLembrete = document.getElementById('botaoAdicionarLembrete');
+    if (formModalLembrete) {
+        formModalLembrete.addEventListener('click', function(event) {
             event.preventDefault(); 
             const titulo = (document.getElementById('titulo') as HTMLInputElement).value;
             const descricao = (document.getElementById('descricao') as HTMLInputElement).value;
@@ -20,35 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
             criarLembrete(titulo, dataLimite || undefined, descricao || undefined);
             limparFormulario();
             atualizarListaLembretes();
-            esconderFormulario();
-        });  
-    }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const botaoCriarLembrete = document.getElementById('botaoCriarLembrete');
-    if (botaoCriarLembrete) {
-        botaoCriarLembrete.addEventListener('click', function() {
-            const form = document.getElementById('formularioLembrete');
-            if(form){
-                if (form.style.display === 'none') {
-                    form.style.display = 'block';
-                } else {
-                    form.style.display = 'none';
-                }
-            }
+        }); 
         
-        });
-    } 
+    }
 });
 
-function esconderFormulario(){
-    const form = document.getElementById('formularioLembrete');
-    if (form){
-        form.style.display='none';
-    }
-
-}
 function limparFormulario() {
     (document.getElementById('titulo') as HTMLInputElement).value = '';
     (document.getElementById('descricao') as HTMLInputElement).value = '';
@@ -69,6 +45,7 @@ function criarLembrete(titulo: string, dataLimite: string | undefined, descricao
     };
     lembretes.push(novoLembrete);
     exibirLembrete(novoLembrete);
+    
 }
 
 

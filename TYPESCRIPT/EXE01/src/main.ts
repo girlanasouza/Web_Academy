@@ -1,6 +1,7 @@
 type Lembrete = [id: number, titulo: string, dataInsercao: Date, dataLimite?: Date, descricao?: string];
 
 let lembretes: Lembrete[] = [];
+
 let lastId = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,10 +65,10 @@ function exibirLembrete(lembrete:Lembrete) {
     titulo.textContent = lembrete[1];
 
     const dataInsercao = document.createElement('p');   
-    dataInsercao.textContent = `Data de inserção: ${lembrete[2].toLocaleString()}`; // Usando o índice correto [2] para dataInsercao
+    dataInsercao.textContent = `Data de inserção: ${lembrete[2].toLocaleString()}`; 
     
     const dataLimite = document.createElement('p');
-    dataLimite.textContent = lembrete[3] ? `Data limite: ${lembrete[3].toLocaleString()}` : 'Data limite: N/A'; // Índice [3] está correto para dataLimite
+    dataLimite.textContent = lembrete[3] ? `Data limite: ${lembrete[3].toLocaleString()}` : 'Data limite: N/A';
     
     const descricao = document.createElement('p');
     descricao.textContent = lembrete[4] ? `Descrição: ${lembrete[4]}` : 'Descrição: N/A';

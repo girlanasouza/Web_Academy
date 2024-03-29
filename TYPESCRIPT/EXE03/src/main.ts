@@ -3,6 +3,53 @@ interface Product {
     fabricante:string,
     valor:number
 }
+
+class TV implements Product {
+    constructor (
+        public modelo :string,
+        public fabricante:string,
+        public valor:number,
+        public resolucao:string,
+        public tamPolegadas:number
+    ){}
+}
+
+class Celular implements Product {
+    constructor(
+        public modelo :string,
+        public fabricante:string,
+        public valor:number,
+        public memoria: number
+    ){}
+}
+
+class Bicicleta implements Product {
+    constructor(
+        public modelo :string,
+        public fabricante:string,
+        public valor:number,
+        public tamanhoAro: number
+    ){}
+}
+
+interface CarrinhoComprasInterface<T extends Product> {
+    produtos : T[];
+    adicionarProduto(produto: T): void;
+    calcularTotal(): number;
+}
+
+class CarrinhoCompras <T extends Product> implements CarrinhoComprasInterface <T> {
+    produtos: T[] = [];
+    adicionarProduto(produto: T): void {
+        this.produtos.push(produto);
+    }
+    calcularTotal(): number {
+        return this.produtos.reduce((total,produto)=>total+produto.valor, 0);
+    }
+}
+
+const carrinho = new CarrinhoCompras<Product>();
+
 // LIMPAR FORMULARIO TV
 function limparFormularioTv() {
     const modeloTvInput = document.getElementById('modeloTv') as HTMLInputElement;
@@ -146,49 +193,3 @@ document.addEventListener('DOMContentLoaded', () => {
     
 });
 
-class TV implements Product {
-    constructor (
-        public modelo :string,
-        public fabricante:string,
-        public valor:number,
-        public resolucao:string,
-        public tamPolegadas:number
-    ){}
-}
-
-class Celular implements Product {
-    constructor(
-        public modelo :string,
-        public fabricante:string,
-        public valor:number,
-        public memoria: number
-    ){}
-}
-
-class Bicicleta implements Product {
-    constructor(
-        public modelo :string,
-        public fabricante:string,
-        public valor:number,
-        public tamanhoAro: number
-    ){}
-}
-
-interface CarrinhoComprasInterface<T extends Product> {
-    produtos : T[];
-    adicionarProduto(produto: T): void;
-    calcularTotal(): number;
-}
-
-class CarrinhoCompras <T extends Product> implements CarrinhoComprasInterface <T> {
-    produtos: T[] = [];
-
-    adicionarProduto(produto: T): void {
-        this.produtos.push(produto);
-    }
-    calcularTotal(): number {
-        return this.produtos.reduce((total,produto)=>total+produto.valor, 0);
-    }
-}
-
-const carrinho = new CarrinhoCompras<Product>();

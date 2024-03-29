@@ -8,47 +8,6 @@ class Aluno {
     ) {}
 }
 
-let lastId: number = 0;
-
-function limparFormulario() {
-    (document.getElementById('nomeCompletoModal') as HTMLInputElement).value = '';
-    (document.getElementById('idadeModal') as HTMLInputElement).value = '';
-    (document.getElementById('alturaModal') as HTMLInputElement).value = '';
-    (document.getElementById('pesoModal') as HTMLInputElement).value = '';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const formModal = document.getElementById('formAlunoModal');
-    if (formModal) {
-        formModal.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const nomeCompletoElement = document.getElementById('nomeCompletoModal') as HTMLInputElement;
-            const idadeElement =  document.getElementById('idadeModal') as HTMLInputElement;
-            const alturaElement = document.getElementById('alturaModal') as HTMLInputElement;
-            const pesoElement = document.getElementById('pesoModal') as HTMLInputElement;
-            if (nomeCompletoElement && idadeElement && alturaElement && pesoElement) {
-                const nomeCompleto= nomeCompletoElement.value;
-                const idade = idadeElement.value;
-                const altura = alturaElement.value;
-                const peso = pesoElement.value;
-
-
-                const novoAluno = new Aluno(++lastId, nomeCompleto, parseInt(idade), parseFloat(altura), parseFloat(peso));
-                turma.adicionarAluno(novoAluno);
-            }
-
-            limparFormulario();
-
-            const modal = document.getElementById('modalAluno');
-            if (modal) {
-                const modalElement = bootstrap.Modal.getInstance(modal);
-                if (modalElement) modalElement.hide();
-            }
-            
-        });
-    }
-});
-
 class Turma {
     private alunos: Aluno[] = [];
 
@@ -62,8 +21,7 @@ class Turma {
 
     private atualizarListaAlunos(): void {
         const table = document.createElement('table');
-        // table.classList.add('table', 'table-striped', 'table-hover', 'custom-table');
-        table.classList.add('table', 'table-striped', 'table-hover', 'custom-table'); // Adicionando a classe custom-table
+        table.classList.add('table', 'table-striped', 'table-hover', 'custom-table');
 
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
@@ -229,5 +187,48 @@ class Turma {
     }
     
 }
+
+
+let lastId: number = 0;
+
+function limparFormulario() {
+    (document.getElementById('nomeCompletoModal') as HTMLInputElement).value = '';
+    (document.getElementById('idadeModal') as HTMLInputElement).value = '';
+    (document.getElementById('alturaModal') as HTMLInputElement).value = '';
+    (document.getElementById('pesoModal') as HTMLInputElement).value = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const formModal = document.getElementById('formAlunoModal');
+    if (formModal) {
+        formModal.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const nomeCompletoElement = document.getElementById('nomeCompletoModal') as HTMLInputElement;
+            const idadeElement =  document.getElementById('idadeModal') as HTMLInputElement;
+            const alturaElement = document.getElementById('alturaModal') as HTMLInputElement;
+            const pesoElement = document.getElementById('pesoModal') as HTMLInputElement;
+            if (nomeCompletoElement && idadeElement && alturaElement && pesoElement) {
+                const nomeCompleto= nomeCompletoElement.value;
+                const idade = idadeElement.value;
+                const altura = alturaElement.value;
+                const peso = pesoElement.value;
+
+
+                const novoAluno = new Aluno(++lastId, nomeCompleto, parseInt(idade), parseFloat(altura), parseFloat(peso));
+                turma.adicionarAluno(novoAluno);
+            }
+
+            limparFormulario();
+
+            const modal = document.getElementById('modalAluno');
+            if (modal) {
+                const modalElement = bootstrap.Modal.getInstance(modal);
+                if (modalElement) modalElement.hide();
+            }
+            
+        });
+    }
+});
+
 
 const turma = new Turma(1, "Turma de Educação Física");

@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
             criarLembrete(titulo, dataLimite || undefined, descricao || undefined);
             limparFormulario();
             atualizarListaLembretes();
+            const modal = document.getElementById('criarLembreteModal');
+            if (modal) {
+                const modalElement = bootstrap.Modal.getInstance(modal);
+                if (modalElement)
+                    modalElement.hide();
+            }
         });
     }
 });

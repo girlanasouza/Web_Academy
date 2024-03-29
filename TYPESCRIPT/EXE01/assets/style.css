@@ -6,10 +6,6 @@ body {
 h2 {
     color: white;
 }
-#logoCarrinho {
-    height: 50px;
-    width: 50px;
-}
 .content {
     flex: 1;
 }

@@ -99,7 +99,6 @@ class Turma {
             excluirBtn.textContent = 'Excluir';
             excluirBtn.classList.add('btn', 'btn-danger', 'mx-1');
             excluirBtn.addEventListener('click', () => {
-                lastId -= 1;
                 this.removerAluno(aluno.id);
                 this.atualizarListaAlunos();
             });

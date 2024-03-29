@@ -15,168 +15,170 @@
    </div>
 </nav>
 
-<div id="carro" class="container text-center mt-2">
-    <div id="carroslImages" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
-            <img src="assets/imagens/hellokitty.jpeg" class="d-block w-100">
-          </div>
-          <div class="carousel-item" data-bs-interval="2000">
-            <img src="assets/imagens/shrek.jpeg" class="d-block w-100">
-          </div>
-          <div class="carousel-item">
-            <img src="assets/imagens/penguim.jpeg" class="d-block w-100">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carroslImages" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carroslImages" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
-
-<div class="modal fade" id="modalAluno" tabindex="-1" aria-labelledby="modalAlunoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAlunoLabel">Adicionar Novo Aluno</h5>
-                <!-- Atualizado para Bootstrap 5 -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+<div class="container text-center mt-2 content">
+    <div id="carro" class="container text-center mt-2">
+        <div id="carroslImages" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+                <img src="assets/imagens/hellokitty.jpeg" class="d-block w-100">
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <img src="assets/imagens/shrek.jpeg" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/imagens/penguim.jpeg" class="d-block w-100">
+              </div>
             </div>
-            <div class="modal-body">
-                <form id="formAlunoModal">
-                    <input type="hidden" id="alunoIdModal">
-                    <div class="mb-3">
-                        <label for="nomeCompletoModal" class="form-label">Nome Completo</label>
-                        <input type="text" class="form-control" id="nomeCompletoModal" placeholder="Nome Completo" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="idadeModal" class="form-label">Idade</label>
-                        <input type="number" class="form-control" id="idadeModal" placeholder="Idade" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="alturaModal" class="form-label">Altura</label>
-                        <input type="number" class="form-control" id="alturaModal" placeholder="Altura (cm)" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="pesoModal" class="form-label">Peso</label>
-                        <input type="number" class="form-control" id="pesoModal" placeholder="Peso (kg)" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <!-- Atualizado para funcionar corretamente com o id do form no modal -->
-                <button id="botaoCriarAluno" type="submit" class="btn btn-primary" form="formAlunoModal">Adicionar</button>
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carroslImages" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carroslImages" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
-</div>
-
-<div id="main-container"> 
-    <div id="lista-alunos-result">
-        <div class="h2 pb-2 mb-4 text-black border-bottom border-black">
-            Lista dos Alunos
-        </div>
-        <div id="listaAlunos">
-            <ul class="list-group">
-                <li class="list-group-item p-3 text-primary-emphasis bg-primary-subtle border">Sem Nenhum Aluno</li>
-                
-            </ul>
-        </div>
-    </div>
-    <!-- MODAL PARA EDICAO DO LEMBRETE -->
-    <div id="content" class="d-flex align-items-center justify-content-center" >
-        <div class="modal fade" id="editarAlunoModal" tabindex="-1" role="dialog" aria-labelledby="editarAlunoModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editarAlunoModalLabel">Editar Aluno</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="novoNomeCompleto">Novo Nome Completo:</label>
-                            <input type="text" id="novoNomeCompleto" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="novaIdade">Nova Idade:</label>
-                            <input type="number" id="novaIdade" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="novaAltura">Nova Altura (cm):</label>
-                            <input type="number" id="novaAltura" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="novoPeso">Novo Peso (kg):</label>
-                            <input type="number" id="novoPeso" class="form-control">
-                        </div>                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="salvarEdicaoBtn">Salvar Alterações</button>
-                    </div>
+    
+    <div class="modal fade" id="modalAluno" tabindex="-1" aria-labelledby="modalAlunoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAlunoLabel">Adicionar Novo Aluno</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
-            </div>
-        </div>
-    </div>
-
-   <!-- ESTATISTICAS DOS ALUNOS -->
-    <div id="estatisticasAluno">        
-        <div class="h2 pb-2 mb-4 text-black border-bottom border-black">
-            Estatísticas de Alunos
-        </div>
-        <div class="p-3 bg-opacity-10rounded-end">
-            <div class="container text-center">
-                <div class="row align-items-start">
-                  <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="assets/imagens/people.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Número de Alunos</h5>
-                          <p class="card-text" id="nrAlunos"></p>
+                <div class="modal-body">
+                    <form id="formAlunoModal">
+                        <div class="mb-3">
+                            <label for="nomeCompletoModal" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="nomeCompletoModal" placeholder="Nome Completo" required>
                         </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="assets/imagens/age.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Média de Idades</h5>
-                          <p class="card-text" id="medIdades"></p>
+                        <div class="mb-3">
+                            <label for="idadeModal" class="form-label">Idade</label>
+                            <input type="number" class="form-control" id="idadeModal" placeholder="Idade" required>
                         </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="assets/imagens/height.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Média de Alturas</h5>
-                          <p class="card-text" id="medAlturas"></p>
+                        <div class="mb-3">
+                            <label for="alturaModal" class="form-label">Altura</label>
+                            <input type="number" class="form-control" id="alturaModal" placeholder="Altura (cm)" required>
                         </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src="assets/imagens/weight.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Média de Pesos</h5>
-                          <p class="card-text" id="medPesos"></p>
+                        <div class="mb-3">
+                            <label for="pesoModal" class="form-label">Peso</label>
+                            <input type="number" class="form-control" id="pesoModal" placeholder="Peso (kg)" required>
                         </div>
-                    </div>
-                  </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button id="botaoCriarAluno" type="submit" class="btn btn-primary" form="formAlunoModal">Adicionar</button>
                 </div>
             </div>
         </div>
     </div>
     
+    <div id="main-container"> 
+        <div id="lista-alunos-result">
+            <div class="h2 pb-2 mb-4 text-black border-bottom border-black">
+                Lista dos Alunos
+            </div>
+            <div id="listaAlunos">
+                <ul class="list-group">
+                    <li class="list-group-item p-3 text-primary-emphasis bg-primary-subtle border">Sem Nenhum Aluno</li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- MODAL PARA EDICAO DO LEMBRETE -->
+        
+        <div id="content" class="d-flex align-items-center justify-content-center" >
+            <div class="modal fade" id="editarAlunoModal" tabindex="-1"  aria-labelledby="editarAlunoModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarAlunoModalLabel">Editar Aluno</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formAlunoModalEdicao">
+                                <div class="mb-3">
+                                    <label for="novoNomeCompleto">Novo Nome Completo:</label>
+                                    <input type="text" id="novoNomeCompleto" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="novaIdade">Nova Idade:</label>
+                                    <input type="number" id="novaIdade" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="novaAltura">Nova Altura (cm):</label>
+                                    <input type="number" id="novaAltura" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="novoPeso">Novo Peso (kg):</label>
+                                    <input type="number" id="novoPeso" class="form-control">
+                                </div>    
+                            </form>         
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary" id="salvarEdicaoBtn">Salvar Alterações</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+       <!-- ESTATISTICAS DOS ALUNOS -->
+        <div id="estatisticasAluno">        
+            <div class="h2 pb-2 mb-4 text-black border-bottom border-black">
+                Estatísticas de Alunos
+            </div>
+            <div class="p-3 bg-opacity-10rounded-end">
+                <div class="container text-center">
+                    <div class="row align-items-start">
+                      <div class="col">
+                        <div class="card" style="width: 15rem;">
+                            <img src="assets/imagens/people.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Número de Alunos</h5>
+                              <p class="card-text" id="nrAlunos"></p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card" style="width: 15rem;">
+                            <img src="assets/imagens/age.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Média de Idades</h5>
+                              <p class="card-text" id="medIdades"></p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card" style="width: 15rem;">
+                            <img src="assets/imagens/height.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Média de Alturas</h5>
+                              <p class="card-text" id="medAlturas"></p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card" style="width: 15rem;">
+                            <img src="assets/imagens/weight.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Média de Pesos</h5>
+                              <p class="card-text" id="medPesos"></p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </div>
+
+
 <!-- FOOTER -->
 <footer class="text-center mt-2 bg-dark" style="color: white;">
     <div class="container">
@@ -184,7 +186,6 @@
     </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="build/main.js"></script>
 </body>

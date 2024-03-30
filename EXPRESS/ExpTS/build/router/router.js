@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = __importDefault(require("express"));
+const home_1 = require("../codes/home");
+const hb1_1 = require("../codes/hb1");
+const hb3_1 = require("../codes/hb3");
+const hb2_1 = require("../codes/hb2");
+const hb4_1 = require("../codes/hb4");
+const lorem_1 = require("../codes/lorem");
+exports.router = express_1.default.Router();
+exports.router.get("/", home_1.home);
+exports.router.get("/lorem/:pagraphs", lorem_1.loremParagraphs);
+exports.router.get("/hb1", hb1_1.hb1);
+exports.router.get("/hb2", hb2_1.hb2);
+exports.router.get("/hb3", hb3_1.hb3);
+exports.router.get("/hb4", hb4_1.hb4);

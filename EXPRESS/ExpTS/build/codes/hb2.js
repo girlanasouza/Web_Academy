@@ -5,7 +5,8 @@ const hb2 = (req, res) => {
     res.render("hb2", {
         poweredByNodejs: true,
         name: 'Express',
-        type: 'Framework'
+        type: 'Framework',
+        layout: false,
     });
 };
 exports.hb2 = hb2;

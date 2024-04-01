@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=development nodemon src/index.ts",
+    "start": "nodemon src/index.ts --watch src",
     "start:db": "npx json-server --watch data/db.json --port 3355",
     "build": "npx tsc",
     "start:prod": "node build/index.js",

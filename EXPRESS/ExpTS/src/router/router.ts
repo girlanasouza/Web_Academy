@@ -21,11 +21,17 @@ router.get("/hb4", mainController.hb4);
 // Controlador Produto
 
 router.get('/produto', produtoController.index);
+
+// duas rotas
 router.get('/produto/create', produtoController.create);
 router.post('/produto/create', produtoController.create);
+
+router.get('/produto/:id', produtoController.read);
+
 router.get('/produto/update/:id', produtoController.update);
 router.post('/produto/update/:id', produtoController.update);
-router.get('/produto/:id', produtoController.read);
-router.post('/produto/:id', produtoController.remove);
+
+
+router.get('/produto/remove/:id', produtoController.remove);
 
 export default router;

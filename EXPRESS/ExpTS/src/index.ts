@@ -5,6 +5,7 @@ import sass from 'node-sass-middleware';
 
 const app = express();
 const PORT = process.env.PORT || 3333;
+require('dotenv').config();
 
 app.engine('handlebars', engine({
   layoutsDir: `${__dirname}/views/layouts`,
@@ -32,6 +33,8 @@ app.use('/js', [
   express.static(`${__dirname}/../public/js`),
   express.static(`${__dirname}/../node_modules/bootstrap/dist/js/`)
 ]);
+
+app.use(express.urlencoded({extended: false}));
 
 app.use(router);
 

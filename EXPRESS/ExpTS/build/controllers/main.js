@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const lorem_ipsum_1 = require("lorem-ipsum");
 const index = (req, res) => {
-    res.end('Welcome to Web Academy :)');
+    res.render('layouts/main', { layout: 'main' });
 };
 const hb1 = (req, res) => {
     res.render("main/hb1", {

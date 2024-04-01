@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { LoremIpsum } from "lorem-ipsum";
 
 const index =(req:Request, res:Response) =>{
-    res.end('Welcome to Web Academy :)');
+    res.render('layouts/main', {layout: 'main'});
 };
 
 const hb1 = (req: Request, res: Response) => {

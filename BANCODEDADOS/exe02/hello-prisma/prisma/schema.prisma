@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  cpf        Int         @id
+  datanasc   DateTime    
+  email      String      @db.VarChar(100)
+  celular    Int
+  pnome      String      @db.VarChar(100)
+  sobrenome  String      @db.VarChar(100)
+  enderecado Enderecado[]
+  compra     Compra[]
+}
+
+model Categoria {
+  id           Int            @id @default(autoincrement())
+  nome         String         @db.VarChar(100)
+  Subcategoria Subcategoria[]
+}
+
+model Subcategoria {
+  id       Int      @id @default(autoincrement())
+  id_cat   Int      
+  nome     String   @db.VarChar(100)
+  Categoria Categoria @relation(fields: [id_cat], references: [id])
+  Produto   Produto[]
+}
+
+model Produto {
+  id          Int            @id @default(autoincrement())
+  id_subcat   Int           
+  modelo      String         @db.VarChar(100)
+  quantidade  Int
+  fabricante  String         @db.VarChar(100)
+  preco       Float
+  Subcategoria Subcategoria @relation(fields: [id_subcat], references: [id])
+  Numero_serie Numero_serie[]
+  Compra       Compra[]
+}
+
+model Numero_serie {
+  id         Int     @id @default(autoincrement())
+  id_produto Int     
+  nr_serie   String  @db.VarChar(100)
+  Produto    Produto @relation(fields: [id_produto], references: [id])
+}
+
+model Endereco {
+  id          Int          @id @default(autoincrement())
+  Dlocal      String       @db.VarChar(100)
+  Enderecado  Enderecado[]
+  Item_compra Item_compra[]
+}
+
+model Enderecado {
+  id          Int      @id @default(autoincrement())
+  id_endereco Int      
+  cpf_cliente Int      
+  Endereco    Endereco @relation(fields: [id_endereco], references: [id])
+  Cliente     Cliente  @relation(fields: [cpf_cliente], references: [cpf])
+}
+
+model Item_compra {
+  id         Int       @id @default(autoincrement())
+  data_hora  DateTime  
+  endereco   Int       
+  desconto   Float
+  forma_pg   String    @db.VarChar(100)
+  total      Float
+  Endereco   Endereco  @relation(fields: [endereco], references: [id])
+  Compra     Compra[]
+}
+
+model Compra {
+  id           Int         @id @default(autoincrement())
+  cpf_cliente  Int        
+  id_itemcompra Int        
+  id_produto   Int         
+  Cliente      Cliente     @relation(fields: [cpf_cliente], references: [cpf])
+  Item_compra  Item_compra @relation(fields: [id_itemcompra], references: [id])
+  Produto      Produto     @relation(fields: [id_produto], references: [id])
+}

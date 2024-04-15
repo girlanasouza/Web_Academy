@@ -1,0 +1,78 @@
+use Loja;
+
+CREATE TABLE CLIENTE (
+	cpf INT PRIMARY KEY,
+    datanasc DATE NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    celular INT NOT NULL,
+    pnome VARCHAR(100) NOT NULL,	
+    sobrenome VARCHAR(100) NOT NULL
+);
+CREATE TABLE CATEGORIA(
+	id INT auto_increment PRIMARY KEY, 
+    nome VARCHAR(100) NOT NULL
+);
+CREATE TABLE SUBCATEGORIA(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    id_cat INT,
+    nome VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_cat) REFERENCES CATEGORIA(id)
+);
+CREATE TABLE PRODUTO(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    id_subcat INT,
+    modelo VARCHAR(100) NOT NULL,
+    quantidade INT NOT NULL,
+    fabricante VARCHAR(100) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_subcat) REFERENCES SUBCATEGORIA(id)
+);
+
+CREATE TABLE NUMERO_SERIE(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto INT,
+    nr_serie VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_produto) REFERENCES PRODUTO(id)
+);
+CREATE TABLE ENDERECO(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    Dlocal VARCHAR(100) NOT NULL
+);
+CREATE TABLE ENDERECADO(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    id_endereco INT,
+    cpf_cliente INT,
+    FOREIGN KEY (id_endereco) REFERENCES ENDERECO(id),
+    FOREIGN KEY (cpf_cliente) REFERENCES CLIENTE(cpf)
+);
+CREATE TABLE ITEM_COMPRA(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    data_hora DATE NOT NULL,
+    endereco INT NOT NULL,
+    desconto DECIMAL(10,2) NOT NULL,
+    forma_pg VARCHAR(100) NOT NULL,	
+    total DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (endereco) REFERENCES ENDERECO(id)
+);
+
+CREATE TABLE COMPRA(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    cpf_cliente INT,
+    id_itemcompra INT,
+    id_produto INT,
+    FOREIGN KEY (cpf_cliente) REFERENCES CLIENTE(cpf),
+    FOREIGN KEY (id_itemcompra) REFERENCES ITEM_COMPRA(id),
+    FOREIGN KEY (id_produto) REFERENCES PRODUTO(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+

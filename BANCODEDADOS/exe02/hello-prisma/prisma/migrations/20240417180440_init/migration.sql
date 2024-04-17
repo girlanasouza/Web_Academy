@@ -1,19 +1,14 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE `Cliente` (
+    `cpf` INTEGER NOT NULL,
+    `datanasc` DATETIME(3) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `celular` INTEGER NOT NULL,
+    `pnome` VARCHAR(100) NOT NULL,
+    `sobrenome` VARCHAR(100) NOT NULL,
 
-  - Added the required column `celular` to the `Cliente` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `datanasc` to the `Cliente` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `email` to the `Cliente` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `pnome` to the `Cliente` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `sobrenome` to the `Cliente` table without a default value. This is not possible if the table is not empty.
-
-*/
--- AlterTable
-ALTER TABLE `Cliente` ADD COLUMN `celular` INTEGER NOT NULL,
-    ADD COLUMN `datanasc` DATETIME(3) NOT NULL,
-    ADD COLUMN `email` VARCHAR(100) NOT NULL,
-    ADD COLUMN `pnome` VARCHAR(100) NOT NULL,
-    ADD COLUMN `sobrenome` VARCHAR(100) NOT NULL;
+    PRIMARY KEY (`cpf`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Categoria` (
@@ -73,6 +68,7 @@ CREATE TABLE `Enderecado` (
 -- CreateTable
 CREATE TABLE `Item_compra` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `cpf_cliente` INTEGER NOT NULL,
     `data_hora` DATETIME(3) NOT NULL,
     `endereco` INTEGER NOT NULL,
     `desconto` DOUBLE NOT NULL,
@@ -83,10 +79,9 @@ CREATE TABLE `Item_compra` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Compra` (
+CREATE TABLE `TemProduto` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `cpf_cliente` INTEGER NOT NULL,
-    `id_itemcompra` INTEGER NOT NULL,
+    `id_item_compra` INTEGER NOT NULL,
     `id_produto` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -111,10 +106,10 @@ ALTER TABLE `Enderecado` ADD CONSTRAINT `Enderecado_cpf_cliente_fkey` FOREIGN KE
 ALTER TABLE `Item_compra` ADD CONSTRAINT `Item_compra_endereco_fkey` FOREIGN KEY (`endereco`) REFERENCES `Endereco`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Compra` ADD CONSTRAINT `Compra_cpf_cliente_fkey` FOREIGN KEY (`cpf_cliente`) REFERENCES `Cliente`(`cpf`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Item_compra` ADD CONSTRAINT `Item_compra_cpf_cliente_fkey` FOREIGN KEY (`cpf_cliente`) REFERENCES `Cliente`(`cpf`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Compra` ADD CONSTRAINT `Compra_id_itemcompra_fkey` FOREIGN KEY (`id_itemcompra`) REFERENCES `Item_compra`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `TemProduto` ADD CONSTRAINT `TemProduto_id_item_compra_fkey` FOREIGN KEY (`id_item_compra`) REFERENCES `Item_compra`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Compra` ADD CONSTRAINT `Compra_id_produto_fkey` FOREIGN KEY (`id_produto`) REFERENCES `Produto`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `TemProduto` ADD CONSTRAINT `TemProduto_id_produto_fkey` FOREIGN KEY (`id_produto`) REFERENCES `Produto`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

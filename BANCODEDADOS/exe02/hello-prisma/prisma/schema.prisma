@@ -21,7 +21,7 @@ model Cliente {
   pnome      String      @db.VarChar(100)
   sobrenome  String      @db.VarChar(100)
   enderecado Enderecado[]
-  compra     Compra[]
+  itemCompra     Item_compra[]
 }
 
 model Categoria {
@@ -30,13 +30,13 @@ model Categoria {
   Subcategoria Subcategoria[]
 }
 
-model Subcategoria {
-  id       Int      @id @default(autoincrement())
-  id_cat   Int      
-  nome     String   @db.VarChar(100)
-  Categoria Categoria @relation(fields: [id_cat], references: [id])
-  Produto   Produto[]
-}
+  model Subcategoria {
+    id       Int      @id @default(autoincrement())
+    id_cat   Int      
+    nome     String   @db.VarChar(100)
+    Categoria Categoria @relation(fields: [id_cat], references: [id])
+    Produto   Produto[]
+  }
 
 model Produto {
   id          Int            @id @default(autoincrement())
@@ -47,7 +47,7 @@ model Produto {
   preco       Float
   Subcategoria Subcategoria @relation(fields: [id_subcat], references: [id])
   Numero_serie Numero_serie[]
-  Compra       Compra[]
+  TemProduto TemProduto[]
 }
 
 model Numero_serie {
@@ -74,21 +74,22 @@ model Enderecado {
 
 model Item_compra {
   id         Int       @id @default(autoincrement())
+  cpf_cliente  Int
   data_hora  DateTime  
   endereco   Int       
   desconto   Float
   forma_pg   String    @db.VarChar(100)
   total      Float
   Endereco   Endereco  @relation(fields: [endereco], references: [id])
-  Compra     Compra[]
+  Cliente      Cliente     @relation(fields: [cpf_cliente], references: [cpf])
+  TemProduto TemProduto[]
+  
 }
 
-model Compra {
-  id           Int         @id @default(autoincrement())
-  cpf_cliente  Int        
-  id_itemcompra Int        
-  id_produto   Int         
-  Cliente      Cliente     @relation(fields: [cpf_cliente], references: [cpf])
-  Item_compra  Item_compra @relation(fields: [id_itemcompra], references: [id])
-  Produto      Produto     @relation(fields: [id_produto], references: [id])
+model TemProduto {
+  id           Int       @id @default(autoincrement())
+  itemCompra   Item_compra @relation(fields: [id_item_compra], references: [id])
+  id_item_compra Int
+  produto      Produto    @relation(fields: [id_produto], references: [id])
+  id_produto   Int
 }

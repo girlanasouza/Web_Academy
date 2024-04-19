@@ -14,10 +14,11 @@ datasource db {
 }
 
 model Cliente {
-  cpf        Int         @id
-  datanasc   DateTime    
+  id        Int  @id @default(autoincrement())
+  cpf        String   @unique   @db.Char(11)
+  datanasc   DateTime    @db.DateTime()
   email      String      @db.VarChar(100)
-  celular    Int
+  celular    Int          @db.Int
   pnome      String      @db.VarChar(100)
   sobrenome  String      @db.VarChar(100)
   enderecado Enderecado[]
@@ -30,13 +31,13 @@ model Categoria {
   Subcategoria Subcategoria[]
 }
 
-  model Subcategoria {
-    id       Int      @id @default(autoincrement())
-    id_cat   Int      
-    nome     String   @db.VarChar(100)
-    Categoria Categoria @relation(fields: [id_cat], references: [id])
-    Produto   Produto[]
-  }
+model Subcategoria {
+  id       Int      @id @default(autoincrement())
+  id_cat   Int      
+  nome     String   @db.VarChar(100)
+  Categoria Categoria @relation(fields: [id_cat], references: [id])
+  Produto   Produto[]
+}
 
 model Produto {
   id          Int            @id @default(autoincrement())
@@ -67,23 +68,22 @@ model Endereco {
 model Enderecado {
   id          Int      @id @default(autoincrement())
   id_endereco Int      
-  cpf_cliente Int      
+  id_cliente Int      
   Endereco    Endereco @relation(fields: [id_endereco], references: [id])
-  Cliente     Cliente  @relation(fields: [cpf_cliente], references: [cpf])
+  Cliente     Cliente  @relation(fields: [id_cliente], references: [id])
 }
 
 model Item_compra {
   id         Int       @id @default(autoincrement())
-  cpf_cliente  Int
+  id_cliente  Int
   data_hora  DateTime  
   endereco   Int       
   desconto   Float
   forma_pg   String    @db.VarChar(100)
   total      Float
   Endereco   Endereco  @relation(fields: [endereco], references: [id])
-  Cliente      Cliente     @relation(fields: [cpf_cliente], references: [cpf])
+  Cliente      Cliente     @relation(fields: [id_cliente], references: [id])
   TemProduto TemProduto[]
-  
 }
 
 model TemProduto {

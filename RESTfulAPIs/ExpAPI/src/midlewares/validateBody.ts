@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express"
-import { StatusCodes } from "http-status-codes"
-import { Schema } from "joi"
+import { Request, Response, NextFunction } from "express";
+import { StatusCodes } from "http-status-codes";
+import { Schema } from "joi";
 
 export const validateBody = (schema: Schema) => {
     return (req: Request, res:Response, next: NextFunction) => {

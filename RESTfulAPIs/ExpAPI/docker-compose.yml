@@ -5,7 +5,7 @@ services:
     build: 
       context: ./backend
     volumes:
-      - ./backend/src:/app/src
+      - ./backend:/app
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
 
@@ -14,7 +14,7 @@ services:
     build: 
       context: ./frontend
     volumes:
-      - ./frontend/src:/app/src
+      - ./frontend:/app
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
   db:
@@ -27,8 +27,8 @@ services:
       - ${MYSQL_PORT}:3306
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD = ${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  
 
 volumes:
   mysql_data:

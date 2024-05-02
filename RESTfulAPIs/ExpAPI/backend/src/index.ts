@@ -9,6 +9,16 @@ import validateEnv from "./utils/validateEnv";
 import express, {Response, Request} from "express";
 import { setLangCookie } from "./midlewares/setLangCookie";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "./swagger-output.json";
+
+
+declare module "express-session" {
+    interface SessionData{
+        uid: string;
+        tipoUsuarioId: string;
+    }
+}
 
 dotenv.config();
 validateEnv();
@@ -24,9 +34,11 @@ app.use(session({
     saveUninitialized: true
     
 }));
+
 app.use(setLangCookie);
 app.use(express.json());
 app.use(router);
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.listen(PORT, ()=>{
     console.log(`Express app iniciada na porta ${PORT}.`);

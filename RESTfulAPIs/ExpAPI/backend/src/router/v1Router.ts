@@ -3,10 +3,26 @@ import { Router } from "express";
 import produtoRouter from "../resources/produto/produto.router";
 import languageRouter from "../resources/languages/language.router";
 import authRouter from '../resources/auth/auth.router';
+import userRouter from "../resources/usuario/usuario.router";
+
 
 const router = Router();
 
-router.use("/produto", produtoRouter);
+router.use(
+    "/produto", 
+    // #swagger.tags = ['Produto']
+    produtoRouter
+);
+
+router.use(
+    "/usuario", 
+    // #swagger.tags = ['Usuario']
+    userRouter
+    );
 router.use("/language", languageRouter);
-router.use("/auth", authRouter);
+router.use(
+    "/auth",
+    // #swagger.tags = ['Auth']
+    authRouter
+);
 export default router;

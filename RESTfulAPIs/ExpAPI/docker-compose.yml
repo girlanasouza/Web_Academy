@@ -8,13 +8,13 @@ services:
       - ./backend:/app
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
-
+    restart: on-failure
   frontend: 
     container_name: frontend_loja
     build: 
       context: ./frontend
     volumes:
-      - ./frontend:/app
+      - ./frontend/src:/app/src
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
   db:

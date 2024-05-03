@@ -10,12 +10,13 @@ generator client {
 }
 
 model Produto {
-  id        String   @id @default(uuid()) @db.Char(36)
-  nome      String   @unique @db.VarChar(100)
-  preco     Decimal  @db.Decimal(10, 2)
-  estoque   Int      @db.Int
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id            String          @id @default(uuid()) @db.Char(40)
+  nome          String          @unique @db.VarChar(100)
+  preco         Decimal         @db.Decimal(10, 2)
+  estoque       Int             @db.Int
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  CompraProduto CompraProduto[]
 
   @@map("produtos")
 }
@@ -29,8 +30,33 @@ model Usuario {
   createdAt     DateTime    @default(now()) @map("created_at")
   updatedAt     DateTime    @updatedAt @map("updated_at")
   tipoUsuario   TipoUsuario @relation(fields: [tipoUsuarioId], references: [id])
+  Compra        Compra[]
 
   @@map("usuarios")
+}
+
+model Compra {
+  id             String          @id @default(uuid()) @db.Char(40)
+  usuario        Usuario         @relation(fields: [usuarioId], references: [id])
+  usuarioId      String          @db.Char(40)
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  CompraProoduto CompraProduto[]
+
+  @@map("compras")
+}
+
+model CompraProduto {
+  id        String   @id @default(uuid()) @db.Char(40)
+  compra    Compra   @relation(fields: [compraId], references: [id])
+  compraId  String   @db.Char(40)
+  produto Produto @relation(fields: [produtoId], references: [id])
+  produtoId String   @db.Char(40)
+  quantidade Int @db.Int
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("compra_produtos")
 }
 
 model TipoUsuario {

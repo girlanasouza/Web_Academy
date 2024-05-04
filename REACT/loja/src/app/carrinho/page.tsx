@@ -1,15 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import ListagemCarrinho from "../components/ListagemCarrinho/ListagemCarrinho";
 import ResumoCarrinho from "../components/ResumoCarrinho/ResumoCarrinho";
 
 export default function Carrinho() {
-  const valorTotalProduto = (
-    precoUnitario: number,
-    quantidade: number
-  ): number => precoUnitario * quantidade;
-
+  const [quantidadeTotalItens, setQuantidadeTotalItens] = useState<number>(0);
+  const valorTotalProduto = (precoUnitario: number, quantidade: number): number => {
+    return precoUnitario * quantidade;
+  };
   return (
     <>
     <Navbar/>
@@ -17,7 +16,11 @@ export default function Carrinho() {
       <main>
         <div className="container p-5">
           <ListagemCarrinho/> 
-          <ResumoCarrinho/>
+          <ResumoCarrinho
+            precoTotal={valorTotalProduto(1000,1)}
+            quantidadeItensTotal={quantidadeTotalItens}
+            setQuantidadeTotalItens={setQuantidadeTotalItens}
+          />
         </div>
       </main>
     </>

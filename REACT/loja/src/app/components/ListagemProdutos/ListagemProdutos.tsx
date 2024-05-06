@@ -1,26 +1,21 @@
-
 import Image from 'next/image';
 import CardProduto from '../CardProduto/CardProduto';
-import { Produto } from '../Produto/Produto';
+import { Produto } from '@/app/types/produto';
 
 interface ListagemProdutosProps {
+    produtos: Produto[];
     adicionarAoCarrinho: (produto: Produto) => void;
 }
 
-export default function ListagemProdutos({
-    adicionarAoCarrinho
-}: ListagemProdutosProps) {
+export default function ListagemProdutos(props: ListagemProdutosProps) {
     return (
-    <>
-        <h5 className="mb-3">Produtos disponíveis:</h5>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-            <CardProduto produto={{ label: 'Notebook 1', preco: 1500 }} adicionarAoCarrinho={adicionarAoCarrinho} />
-            <CardProduto produto={{ label: 'Notebook 2', preco: 1000 }} adicionarAoCarrinho={adicionarAoCarrinho} />
-            <CardProduto produto={{label:'Notebook 3', preco:200}} adicionarAoCarrinho={adicionarAoCarrinho}/>
-            <CardProduto produto={{ label:'Notebook 4', preco:100}} adicionarAoCarrinho={adicionarAoCarrinho}/>
-        
-        </div>
-    </>
-    )
-
+        <>
+            <h5 className="mb-3">Produtos disponíveis:</h5>
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+                {props.produtos.map(produto => (
+                    <CardProduto key={produto.id} produto={produto} adicionarAoCarrinho={props.adicionarAoCarrinho} />
+                ))}
+            </div>
+        </>
+    );
 }

@@ -1,6 +1,9 @@
 
 interface ItemCarrinho {
-    label: string
+    id: string;
+    nome: string;
+    preco: number;
+    quantidade:number;
 }
 
 

@@ -4,28 +4,28 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import ResumoCarrinho from "./components/ResumoCarrinho/ResumoCarrinho";
 import ListagemProdutos from "./components/ListagemProdutos/ListagemProdutos";
-import { Produto } from "./types/produto";
 import { mockProdutos } from "./mocks/produtos";
 
-export default function Produtos() {
-  const [precoTotal, setTotalPrice] = useState<number>(0);
-  const [quantidadeTotalItens, setQuantidadeTotalItens] = useState<number>(0);
-  const adicionarAoCarrinho = (produto: Produto): void => {
-    // setTotalPrice(prevPrice => prevPrice + produto.preco);
-    setQuantidadeTotalItens(prevQuantity => prevQuantity + 1);
-  };
+export default function Produtos( ) {
+
+  // const [precoTotal, setTotalPrice] = useState<number>(0);
+  // const [quantidadeTotalItens, setQuantidadeTotalItens] = useState<number>(0);
+  // const adicionarAoCarrinho = (produto: Produto): void => {
+  //   // setTotalPrice(prevPrice => prevPrice + produto.preco);
+  //   setQuantidadeTotalItens(prevQuantity => prevQuantity + 1);
+  // };
+  const produtos = mockProdutos;
   return (
     <>
     <Navbar/>
 
       <main>
-        <div className="container p-5">
+        <div className="container p-5"> 
           <ResumoCarrinho
-            precoTotal={precoTotal}
-            quantidadeItensTotal={quantidadeTotalItens}
-            setQuantidadeTotalItens={setQuantidadeTotalItens}
+            quantidadeItensTotal={0}
+            precoTotal={0}
           />
-          <ListagemProdutos produtos={mockProdutos} adicionarAoCarrinho={adicionarAoCarrinho} />
+          <ListagemProdutos produtos={produtos} />
         </div>
       </main>
     </>

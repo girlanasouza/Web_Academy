@@ -4,12 +4,12 @@ import { Produto } from '@/app/types/produto';
 
 interface IListagemProdutos {
     produtos: Produto[];
-    // adicionarAoCarrinho: (produto: Produto) => void;
+    adicionarAoCarrinho: (produto: Produto) => void;
 }
 
 export default function ListagemProdutos({
     produtos,
-    // adicionarAoCarrinho,
+    adicionarAoCarrinho,
 }: IListagemProdutos) {
     return (
         <>
@@ -19,6 +19,7 @@ export default function ListagemProdutos({
                     <CardProduto 
                         key={produto.id} 
                         produto={produto} 
+                        adicionarAoCarrinho={adicionarAoCarrinho}
                     />
                 ))}
             </div>

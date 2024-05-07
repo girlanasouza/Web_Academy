@@ -21,10 +21,7 @@ export default function Produtos( ) {
 
       <main>
         <div className="container p-5"> 
-          <ResumoCarrinho
-            quantidadeItensTotal={0}
-            precoTotal={0}
-          />
+          {/* <ResumoCarrinho/> */}
           <ListagemProdutos produtos={produtos} />
         </div>
       </main>

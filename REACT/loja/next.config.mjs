@@ -5,7 +5,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: " ranekapi.origamid.dev",
+                hostname: "ranekapi.origamid.dev",
             }
         ]
     }

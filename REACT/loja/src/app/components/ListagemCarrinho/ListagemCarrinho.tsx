@@ -1,7 +1,12 @@
+import { Carrinho } from "@/app/types/carrinho";
 import ItemCarrinho from "../ItemCarrinho/ItemCarrinho";
 
+interface IListagemCarrinho {
+  carrinho: Carrinho;
+}
 
-export default function ListagemCarrinho() {
+
+export default function ListagemCarrinho({carrinho}: IListagemCarrinho) {
     return (
     <>
       <div className="card mb-4">
@@ -21,9 +26,18 @@ export default function ListagemCarrinho() {
                 </tr>
               </thead>
               <tbody>
-                <ItemCarrinho label="Notebook 1"/>
+                {/* <ItemCarrinho label="Notebook 1"/>
                 <ItemCarrinho label="Notebook 2"/>
-                <ItemCarrinho label="Notebook 3"/>
+                <ItemCarrinho label="Notebook 3"/> */}
+
+                {
+                  carrinho.itensCarrinho.map((itemCarrinho)=> (
+                    <ItemCarrinho
+                    key={itemCarrinho.id}
+                    itemCarrinho={itemCarrinho}
+                    />
+                  ))
+                }
               </tbody>
             </table>
           </div>

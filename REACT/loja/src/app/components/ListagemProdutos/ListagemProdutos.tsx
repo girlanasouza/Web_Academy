@@ -19,7 +19,7 @@ export default function ListagemProdutos({
                     <CardProduto 
                         key={produto.id} 
                         produto={produto} 
-                         />
+                    />
                 ))}
             </div>
         </>

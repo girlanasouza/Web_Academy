@@ -1,13 +1,12 @@
+import { ItemCarrinho } from '@/app/types/carrinho';
 
-interface ItemCarrinho {
-    id: string;
-    nome: string;
-    preco: number;
-    quantidade:number;
+
+interface ItemCarrinhoProps {
+    itemCarrinho: ItemCarrinho;
 }
 
 
-export default function ItemCarrinho({label}: ItemCarrinho) {
+export default function ItemCarrinho({itemCarrinho}: ItemCarrinhoProps) {
     const valorTotalProduto = (
         precoUnitario: number,
         quantidade: number
@@ -16,11 +15,11 @@ export default function ItemCarrinho({label}: ItemCarrinho) {
     return (
         <>
             <tr key="1">
-            <td>{label}</td>
-            <td>R$ {(1500).toFixed(2)}</td>
-            <td>2</td>
+            <td>{itemCarrinho.nome}</td>
+            <td>R$ {itemCarrinho.preco}</td>
+            <td>{itemCarrinho.quantidade}</td>
 
-            <td>R$ {valorTotalProduto(1500, 2).toFixed(2)}</td>
+            <td>R$ {(itemCarrinho.preco*itemCarrinho.quantidade).toFixed(2)}</td>
             <td>
             <button className="btn btn-danger btn-sm">
                 Remover

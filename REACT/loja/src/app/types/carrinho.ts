@@ -1,11 +1,10 @@
-interface ItemCarrinho {
+export interface ItemCarrinho {
     id: string;
     nome: string;
     preco: number;
     quantidade: number;
 }
 
-
-interface Carrinho {
+export interface Carrinho {
     itensCarrinho: ItemCarrinho[];
 }

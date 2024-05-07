@@ -13,42 +13,50 @@ export default function Produtos( ) {
   const carrinho: Carrinho = {
     itensCarrinho: mockItensCarrinho
   };
+
+  const [produtos, setProdutos] = useState<Produto[]|null>(null);
   const [quantidadeItensTotal, setQuantidadeTotalItens]= useState<number>(0);
   const [precoTotal, setPrecoTotal] = useState<number>(0);
 
-  useEffect(() => {
-    let totalItens = 0;
-    let totalPrice = 0;
-
-    carrinho.itensCarrinho.forEach((itemCarrinho) => {
-      totalItens += itemCarrinho.quantidade;
-      totalPrice += itemCarrinho.preco * itemCarrinho.quantidade;
-    });
-
-    setQuantidadeTotalItens(totalItens);
-    setPrecoTotal(totalPrice);
-  }, [carrinho]);
   const adicionarAoCarrinho = (produto: Produto): void => {
     setPrecoTotal(prevPrice => prevPrice + parseFloat(produto.preco));
     setQuantidadeTotalItens(prevQtd => prevQtd + 1);
   }
 
-  const produtos = mockProdutos;
+  useEffect(()=>{
+    const fetchDataProdutos = async () => {
+      try {
+        const response = await fetch(
+          "https://ranekapi.origamid.dev/json/api/produto"
+        );
+        const jsonDataProdutos = await response.json();
+        setProdutos(jsonDataProdutos);
+      } catch (error) {
+        console.error("Erro ao buscar dados da api de produtos:, ", error);
+      }
+    };
+    fetchDataProdutos();
+  })
   
   return (
     <>
-
 
       <main>
         <div className="container p-5"> 
           <ResumoCarrinho 
             quantidadeItensTotal={quantidadeItensTotal}
             precoTotal={precoTotal}
-          /> 
-          <ListagemProdutos 
-            produtos={produtos} 
-            adicionarAoCarrinho={adicionarAoCarrinho}
-          />
+          />  
+
+          {
+            produtos ? (
+              <ListagemProdutos 
+                produtos={produtos} 
+                adicionarAoCarrinho={adicionarAoCarrinho}
+              />
+            ): null
+          }
+
         </div>
       </main>
     </>

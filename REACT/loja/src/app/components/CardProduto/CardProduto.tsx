@@ -25,7 +25,7 @@ export default function CardProduto( { produto, adicionarAoCarrinho }: CardProdu
                 <p className="card-text text-secondary">{produto.preco}</p>
                 <button 
                     onClick={()=>adicionarAoCarrinho(produto)}
-                    className='btn btn-primary'>Adicionar no carrinho</button>
+                    className='btn btn-dark d-block w-100'>Adicionar no carrinho</button>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ import { mockItensCarrinho } from "./mocks/itensCarrinho";
 import { Carrinho } from "./types/carrinho";
 import { Produto } from "./types/produto";
 
-export default function Produtos( ) {
+export default function App( ) {
   const carrinho: Carrinho = {
     itensCarrinho: mockItensCarrinho
   };

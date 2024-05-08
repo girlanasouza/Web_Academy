@@ -4,10 +4,8 @@ import { usePathname } from "next/navigation"
 export default function Navbar(){
   const pathname = usePathname();
   const escoderNav = pathname=="/login" || pathname=="/cadastro";
-  if (escoderNav) {
-    return null;
-  } else {
-    return (
+  
+  return escoderNav ? null :  (
       <>
       <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
         <div className="container-fluid">
@@ -46,6 +44,6 @@ export default function Navbar(){
       
       </>
   )
-  }
+  
 
 }

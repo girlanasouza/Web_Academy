@@ -9,6 +9,7 @@ import { mockItensCarrinho } from "./mocks/itensCarrinho";
 import { Carrinho } from "./types/carrinho";
 import { Produto } from "./types/produto";
 
+// adicioando na brach do tp1
 export default function Produtos( ) {
   const carrinho: Carrinho = {
     itensCarrinho: mockItensCarrinho

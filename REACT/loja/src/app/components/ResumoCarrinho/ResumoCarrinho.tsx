@@ -21,7 +21,6 @@ export default function ResumoCarrinho({
           <p className="card-text fw-medium">
             Valor total: R${precoTotal.toFixed(2)}
           </p>
-          
         </div>
       </div>
     </>

@@ -1,9 +1,7 @@
-
-
-export default function Navbar(){
-    return (
-        <>
-              <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
+export default function Navbar() {
+  return (
+    <>
+      <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             Loja WA
@@ -37,7 +35,6 @@ export default function Navbar(){
           </div>
         </div>
       </nav>
-        
-        </>
-    )
+    </>
+  );
 }

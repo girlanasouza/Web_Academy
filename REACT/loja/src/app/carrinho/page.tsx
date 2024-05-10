@@ -8,10 +8,10 @@ import { Carrinho } from "../types/carrinho";
 
 export default function Carrinho() {
   const carrinho: Carrinho = {
-    itensCarrinho: mockItensCarrinho
+    itensCarrinho: mockItensCarrinho,
   };
-    
-  const [quantidadeItensTotal, setQuantidadeTotalItens]= useState<number>(0);
+
+  const [quantidadeItensTotal, setQuantidadeTotalItens] = useState<number>(0);
   const [precoTotal, setPrecoTotal] = useState<number>(0);
 
   useEffect(() => {
@@ -27,14 +27,12 @@ export default function Carrinho() {
     setPrecoTotal(totalPrice);
   }, [carrinho]);
 
-
   return (
     <>
-
       <main>
         <div className="container p-5">
-          <ListagemCarrinho carrinho={carrinho}/> 
-          <ResumoCarrinho 
+          <ListagemCarrinho carrinho={carrinho} />
+          <ResumoCarrinho
             quantidadeItensTotal={quantidadeItensTotal}
             precoTotal={precoTotal}
           />

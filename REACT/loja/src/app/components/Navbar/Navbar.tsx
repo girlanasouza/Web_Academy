@@ -1,12 +1,12 @@
-"use client"
-import { usePathname } from "next/navigation"
+"use client";
+import { usePathname } from "next/navigation";
 
-export default function Navbar(){
+export default function Navbar() {
   const pathname = usePathname();
-  const escoderNav = pathname=="/login" || pathname=="/cadastro";
-  
-  return escoderNav ? null :  (
-      <>
+  const escoderNav = pathname == "/login" || pathname == "/cadastro";
+
+  return escoderNav ? null : (
+    <>
       <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
@@ -41,9 +41,6 @@ export default function Navbar(){
           </div>
         </div>
       </nav>
-      
-      </>
-  )
-  
-
+    </>
+  );
 }

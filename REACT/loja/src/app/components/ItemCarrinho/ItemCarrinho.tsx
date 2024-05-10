@@ -1,33 +1,27 @@
-import { ItemCarrinho } from '@/app/types/carrinho';
-
+import { ItemCarrinho } from "@/app/types/carrinho";
 
 interface ItemCarrinhoProps {
-    itemCarrinho: ItemCarrinho;
+  itemCarrinho: ItemCarrinho;
 }
 
+export default function ItemCarrinho({ itemCarrinho }: ItemCarrinhoProps) {
+  const valorTotalProduto = (
+    precoUnitario: number,
+    quantidade: number,
+  ): number => precoUnitario * quantidade;
 
-export default function ItemCarrinho({itemCarrinho}: ItemCarrinhoProps) {
-    const valorTotalProduto = (
-        precoUnitario: number,
-        quantidade: number
-    ): number => precoUnitario * quantidade;
-    
-    return (
-        <>
-            <tr key="1">
-            <td>{itemCarrinho.nome}</td>
-            <td>R$ {itemCarrinho.preco}</td>
-            <td>{itemCarrinho.quantidade}</td>
+  return (
+    <>
+      <tr key="1">
+        <td>{itemCarrinho.nome}</td>
+        <td>R$ {itemCarrinho.preco}</td>
+        <td>{itemCarrinho.quantidade}</td>
 
-            <td>R$ {(itemCarrinho.preco*itemCarrinho.quantidade).toFixed(2)}</td>
-            <td>
-            <button className="btn btn-danger btn-sm">
-                Remover
-            </button>
-            </td>
-        </tr>
-        </>
-    )
-
-
+        <td>R$ {(itemCarrinho.preco * itemCarrinho.quantidade).toFixed(2)}</td>
+        <td>
+          <button className="btn btn-danger btn-sm">Remover</button>
+        </td>
+      </tr>
+    </>
+  );
 }

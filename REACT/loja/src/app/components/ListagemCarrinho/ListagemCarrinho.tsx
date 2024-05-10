@@ -5,15 +5,12 @@ interface IListagemCarrinho {
   carrinho: Carrinho;
 }
 
-
-export default function ListagemCarrinho({carrinho}: IListagemCarrinho) {
-    return (
+export default function ListagemCarrinho({ carrinho }: IListagemCarrinho) {
+  return (
     <>
       <div className="card mb-4">
         <div className="row card-body">
-          <h5 className="card-title mb-4 fw-light">
-            Produtos selecionados
-          </h5>
+          <h5 className="card-title mb-4 fw-light">Produtos selecionados</h5>
           <div className="table-responsive">
             <table className="table ">
               <thead>
@@ -30,19 +27,17 @@ export default function ListagemCarrinho({carrinho}: IListagemCarrinho) {
                 <ItemCarrinho label="Notebook 2"/>
                 <ItemCarrinho label="Notebook 3"/> */}
 
-                {
-                  carrinho.itensCarrinho.map((itemCarrinho)=> (
-                    <ItemCarrinho
+                {carrinho.itensCarrinho.map((itemCarrinho) => (
+                  <ItemCarrinho
                     key={itemCarrinho.id}
                     itemCarrinho={itemCarrinho}
-                    />
-                  ))
-                }
+                  />
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </>
-    )
+  );
 }

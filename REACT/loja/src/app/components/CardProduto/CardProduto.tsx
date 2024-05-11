@@ -23,10 +23,11 @@ export default function CardProduto({
 
         <div className="card-body bg-light">
           <h5 className="card-title">{produto.nome}</h5>
-          <p className="card-text text-secondary">{produto.preco}</p>
+          <p className="card-text text-secondary">R$ {produto.preco}</p>
           <button
             onClick={() => adicionarAoCarrinho(produto)}
-            className="btn btn-primary"
+            className="btn btn-dark d-block w-100"
+            type="button"
           >
             Adicionar no carrinho
           </button>

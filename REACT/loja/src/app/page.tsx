@@ -6,13 +6,11 @@ import ResumoCarrinho from "./components/ResumoCarrinho/ResumoCarrinho";
 import ListagemProdutos from "./components/ListagemProdutos/ListagemProdutos";
 import { mockProdutos } from "./mocks/produtos";
 import { mockItensCarrinho } from "./mocks/itensCarrinho";
-import { Carrinho } from "./types/carrinho";
+import { ProdutoCarrinho } from "./types/carrinho";
 import { Produto } from "./types/produto";
 
 export default function Produtos() {
-  const carrinho: Carrinho = {
-    itensCarrinho: mockItensCarrinho,
-  };
+  const produtos = mockProdutos;
   const [quantidadeItensTotal, setQuantidadeTotalItens] = useState<number>(0);
   const [precoTotal, setPrecoTotal] = useState<number>(0);
 
@@ -20,8 +18,6 @@ export default function Produtos() {
     setPrecoTotal((prevPrice) => prevPrice + parseFloat(produto.preco));
     setQuantidadeTotalItens((prevQtd) => prevQtd + 1);
   };
-
-  const produtos = mockProdutos;
 
   return (
     <>

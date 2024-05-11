@@ -1,43 +1,53 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar/Navbar";
+import React, { useState, useMemo } from "react";
 import ListagemCarrinho from "../components/ListagemCarrinho/ListagemCarrinho";
 import ResumoCarrinho from "../components/ResumoCarrinho/ResumoCarrinho";
 import { mockItensCarrinho } from "../mocks/itensCarrinho";
-import { Carrinho } from "../types/carrinho";
+import { ProdutoCarrinho } from "../types/carrinho";
 
 export default function Carrinho() {
-  const carrinho: Carrinho = {
-    itensCarrinho: mockItensCarrinho,
+  const [precoTotal, setPrecoTotal] = useState<number>(
+    mockItensCarrinho.reduce(
+      (total, item) => total + item.preco * item.quantidade,
+      0
+    )
+  );
+
+  const [quantidadeItensTotal, setQuantidadeItensTotal] = useState<number>(
+    () => {
+      const total = mockItensCarrinho.reduce(
+        (total, item) => total + item.quantidade,
+        0
+      );
+      return total;
+    }
+  );
+
+  const [itensCarrinho, setItensCarrinho] =
+    useState<ProdutoCarrinho[]>(mockItensCarrinho);
+
+  const removerItemDoCarrinho = (id: string) => {
+    const updatedItens = itensCarrinho.filter((item) => item.id !== id);
+    const itemRemovido: ProdutoCarrinho | undefined = itensCarrinho.find(
+      (item: ProdutoCarrinho) => item.id === id
+    );
+    if (itemRemovido) {
+      setItensCarrinho(updatedItens);
+      setQuantidadeItensTotal(quantidadeItensTotal - itemRemovido.quantidade);
+      setPrecoTotal(precoTotal - itemRemovido.preco * itemRemovido.quantidade);
+    }
   };
 
-  const [quantidadeItensTotal, setQuantidadeTotalItens] = useState<number>(0);
-  const [precoTotal, setPrecoTotal] = useState<number>(0);
-
-  useEffect(() => {
-    let totalItens = 0;
-    let totalPrice = 0;
-
-    carrinho.itensCarrinho.forEach((itemCarrinho) => {
-      totalItens += itemCarrinho.quantidade;
-      totalPrice += itemCarrinho.preco * itemCarrinho.quantidade;
-    });
-
-    setQuantidadeTotalItens(totalItens);
-    setPrecoTotal(totalPrice);
-  }, [carrinho]);
-
   return (
-    <>
-      <main>
-        <div className="container p-5">
-          <ListagemCarrinho carrinho={carrinho} />
-          <ResumoCarrinho
-            quantidadeItensTotal={quantidadeItensTotal}
-            precoTotal={precoTotal}
-          />
-        </div>
-      </main>
-    </>
+    <div>
+      <ListagemCarrinho
+        carrinho={itensCarrinho}
+        removerItemDoCarrinho={removerItemDoCarrinho}
+      />
+      <ResumoCarrinho
+        quantidadeItensTotal={quantidadeItensTotal}
+        precoTotal={precoTotal}
+      />
+    </div>
   );
 }

@@ -23,11 +23,13 @@ export default function App() {
     setQuantidadeTotalItens((prevQtd) => prevQtd + 1);
   };
 
+  const removerAoCarrinho = (): void => {};
+
   useEffect(() => {
     const fetchDataProdutos = async () => {
       try {
         const response = await fetch(
-          "https://ranekapi.origamid.dev/json/api/produto",
+          "https://ranekapi.origamid.dev/json/api/produto"
         );
         const jsonDataProdutos = await response.json();
         setProdutos(jsonDataProdutos);

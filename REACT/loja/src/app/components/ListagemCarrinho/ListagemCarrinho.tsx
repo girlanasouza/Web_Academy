@@ -3,9 +3,13 @@ import ItemCarrinho from "../ItemCarrinho/ItemCarrinho";
 
 interface IListagemCarrinho {
   carrinho: Carrinho;
+  removerDoCarrinho: () => void;
 }
 
-export default function ListagemCarrinho({ carrinho }: IListagemCarrinho) {
+export default function ListagemCarrinho({
+  carrinho,
+  removerDoCarrinho,
+}: IListagemCarrinho) {
   return (
     <>
       <div className="card mb-4">
@@ -31,6 +35,7 @@ export default function ListagemCarrinho({ carrinho }: IListagemCarrinho) {
                   <ItemCarrinho
                     key={itemCarrinho.id}
                     itemCarrinho={itemCarrinho}
+                    removerDoCarrinho={removerDoCarrinho}
                   />
                 ))}
               </tbody>

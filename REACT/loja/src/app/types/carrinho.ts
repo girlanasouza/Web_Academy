@@ -1,4 +1,4 @@
-export interface ItemCarrinho {
+export interface ProdutoCarrinho {
   id: string;
   nome: string;
   preco: number;
@@ -6,5 +6,5 @@ export interface ItemCarrinho {
 }
 
 export interface Carrinho {
-  itensCarrinho: ItemCarrinho[];
+  itensCarrinho: ProdutoCarrinho[];
 }

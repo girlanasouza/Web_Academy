@@ -3,7 +3,7 @@ export interface Foto {
   src: string;
 }
 
-export interface Produto {
+export interface ItemProduto {
   id: string;
   fotos: Foto[];
   nome: string;

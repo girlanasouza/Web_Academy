@@ -39,15 +39,19 @@ export default function Carrinho() {
   };
 
   return (
-    <div>
-      <ListagemCarrinho
-        carrinho={itensCarrinho}
-        removerItemDoCarrinho={removerItemDoCarrinho}
-      />
-      <ResumoCarrinho
-        quantidadeItensTotal={quantidadeItensTotal}
-        precoTotal={precoTotal}
-      />
-    </div>
+    <>
+      <main>
+        <div className="container p-5">
+          <ListagemCarrinho
+            carrinho={itensCarrinho}
+            removerItemDoCarrinho={removerItemDoCarrinho}
+          />
+          <ResumoCarrinho
+            quantidadeItensTotal={quantidadeItensTotal}
+            precoTotal={precoTotal}
+          />
+        </div>
+      </main>
+    </>
   );
 }

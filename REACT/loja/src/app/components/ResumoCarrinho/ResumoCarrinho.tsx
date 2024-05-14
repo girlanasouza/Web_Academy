@@ -1,5 +1,5 @@
 import React from "react";
-import { Carrinho, ItemCarrinho } from "@/app/types/carrinho";
+import { Carrinho, ProdutoCarrinho } from "@/app/types/carrinho";
 
 interface ResumoCarrinhoProps {
   quantidadeItensTotal: number;

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import CardProduto from "../CardProduto/CardProduto";
-import { Produto } from "@/app/types/produto";
+import { ItemProduto } from "@/app/types/produto";
 
 interface IListagemProdutos {
-  produtos: Produto[];
-  adicionarAoCarrinho: (produto: Produto) => void;
+  produtos: ItemProduto[];
+  adicionarAoCarrinho: (produto: ItemProduto) => void;
 }
 
 export default function ListagemProdutos({

@@ -8,6 +8,7 @@ import { mockProdutos } from "./mocks/produtos";
 import { mockItensCarrinho } from "./mocks/itensCarrinho";
 import { Carrinho } from "./types/carrinho";
 import { ItemProduto } from "./types/produto";
+import { useQuery } from "@tanstack/react-query";
 
 export default function App() {
   const carrinho: Carrinho = {
@@ -22,21 +23,35 @@ export default function App() {
     setPrecoTotal((prevPrice) => prevPrice + parseFloat(produto.preco));
     setQuantidadeTotalItens((prevQtd) => prevQtd + 1);
   };
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["produtos"],
+    queryFn: () =>
+      fetch("https://ranekapi.origamid.dev/json/api/produto").then((res) =>
+        res.json()
+      ),
+    enabled: true, // This ensures that the query is enabled by default
+  });
 
   useEffect(() => {
-    const fetchDataProdutos = async () => {
-      try {
-        const response = await fetch(
-          "https://ranekapi.origamid.dev/json/api/produto"
-        );
-        const jsonDataProdutos = await response.json();
-        setProdutos(jsonDataProdutos);
-      } catch (error) {
-        console.error("Erro ao buscar dados da api de produtos:, ", error);
-      }
-    };
-    fetchDataProdutos();
-  }, []);
+    if (data) {
+      setProdutos(data);
+    }
+  }, [data]);
+  // useEffect(() => {
+  // const fetchDataProdutos = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://ranekapi.origamid.dev/json/api/produto"
+  //     );
+  //     const jsonDataProdutos = await response.json();
+  //     setProdutos(jsonDataProdutos);
+  //   } catch (error) {
+  //     console.error("Erro ao buscar dados da api de produtos:, ", error);
+  //   }
+  // };
+  // fetchDataProdutos();
+
+  // }, []);
 
   return (
     <>

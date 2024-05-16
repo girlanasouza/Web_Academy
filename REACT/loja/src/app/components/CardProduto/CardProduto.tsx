@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Router, { useRouter } from "next/navigation";
 import { ItemProduto } from "@/app/types/produto";
+import { useDetalhesProduto } from "@/app/hooks/useDetalhesProduto";
 
 interface CardProdutoProps {
   produto: ItemProduto;
@@ -12,11 +13,13 @@ export default function CardProduto({
   adicionarAoCarrinho,
 }: CardProdutoProps) {
   const router = useRouter();
-
   const verDetalhesProduto = (nomeProduto: string) => {
     router.push(`/produto/${nomeProduto}`);
   };
-
+  const { data, isPending, isError } = useDetalhesProduto(produto.nome);
+  if (isPending) return <h5>Carregando...</h5>;
+  if (isError) return <h5>Ocorreu um erro ao carregar os produtos!!!</h5>;
+  if (!data) return <h5>O produto não está resolvido!!!</h5>;
   return (
     <div className="col">
       <div className="card shadow-sm h-100">

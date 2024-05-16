@@ -29,7 +29,7 @@ export default function App() {
       fetch("https://ranekapi.origamid.dev/json/api/produto").then((res) =>
         res.json()
       ),
-    enabled: true, // This ensures that the query is enabled by default
+    enabled: true, 
   });
 
   useEffect(() => {

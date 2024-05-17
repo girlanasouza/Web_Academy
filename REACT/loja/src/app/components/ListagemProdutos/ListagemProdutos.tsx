@@ -1,6 +1,5 @@
-import Image from "next/image";
-import CardProduto from "../CardProduto/CardProduto";
 import { ItemProduto } from "@/app/types/produto";
+import CardProduto from "../CardProduto/CardProduto";
 import { useListaProdutos } from "@/app/hooks/useListaProdutos";
 
 interface IListagemProdutos {

@@ -1,21 +1,10 @@
 "use client";
-import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import Navbar from "./components/Navbar/Navbar";
+import { ItemProduto } from "./types/produto";
+import React, { useState } from "react";
 import ResumoCarrinho from "./components/ResumoCarrinho/ResumoCarrinho";
 import ListagemProdutos from "./components/ListagemProdutos/ListagemProdutos";
-import { mockProdutos } from "./mocks/produtos";
-import { mockItensCarrinho } from "./mocks/itensCarrinho";
-import { Carrinho } from "./types/carrinho";
-import { ItemProduto } from "./types/produto";
-import { useQuery } from "@tanstack/react-query";
 
 export default function App() {
-  const carrinho: Carrinho = {
-    itensCarrinho: mockItensCarrinho,
-  };
-
-  const [produtos, setProdutos] = useState<ItemProduto[] | null>(null);
   const [quantidadeItensTotal, setQuantidadeTotalItens] = useState<number>(0);
   const [precoTotal, setPrecoTotal] = useState<number>(0);
 
@@ -23,35 +12,6 @@ export default function App() {
     setPrecoTotal((prevPrice) => prevPrice + parseFloat(produto.preco));
     setQuantidadeTotalItens((prevQtd) => prevQtd + 1);
   };
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["produtos"],
-    queryFn: () =>
-      fetch("https://ranekapi.origamid.dev/json/api/produto").then((res) =>
-        res.json()
-      ),
-    enabled: true, 
-  });
-
-  useEffect(() => {
-    if (data) {
-      setProdutos(data);
-    }
-  }, [data]);
-  // useEffect(() => {
-  // const fetchDataProdutos = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       "https://ranekapi.origamid.dev/json/api/produto"
-  //     );
-  //     const jsonDataProdutos = await response.json();
-  //     setProdutos(jsonDataProdutos);
-  //   } catch (error) {
-  //     console.error("Erro ao buscar dados da api de produtos:, ", error);
-  //   }
-  // };
-  // fetchDataProdutos();
-
-  // }, []);
 
   return (
     <>
@@ -61,10 +21,7 @@ export default function App() {
             quantidadeItensTotal={quantidadeItensTotal}
             precoTotal={precoTotal}
           />
-
-          {produtos ? (
-            <ListagemProdutos adicionarAoCarrinho={adicionarAoCarrinho} />
-          ) : null}
+          <ListagemProdutos adicionarAoCarrinho={adicionarAoCarrinho} />
         </div>
       </main>
     </>

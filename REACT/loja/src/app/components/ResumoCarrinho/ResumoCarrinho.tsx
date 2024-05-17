@@ -1,5 +1,4 @@
 import React from "react";
-import { Carrinho, ProdutoCarrinho } from "@/app/types/carrinho";
 
 interface ResumoCarrinhoProps {
   quantidadeItensTotal: number;

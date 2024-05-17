@@ -1,4 +1,3 @@
-import Image from "next/image";
 import CardProduto from "../CardProduto/CardProduto";
 import { ItemProduto } from "@/app/types/produto";
 import { useListaProdutos } from "@/app/hooks/useListaProdutos";
@@ -15,6 +14,7 @@ export default function ListagemProdutos({
   if (isPending) return <h5>Carregando...</h5>;
   if (isError) return <h5>Ocorreu um erro ao carregar os produtos!!!</h5>;
   if (!produtos) return <h5>Não há produtos disponíveis!!!</h5>;
+
   return (
     <>
       <h5 className="mb-3">Produtos disponíveis:</h5>

@@ -1,23 +1,29 @@
 import { ItemProduto } from "@/app/types/produto";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import {
+  useFavoritosContext,
+  useVerificaProdutoFavorito,
+} from "../FavoritosProvider/FavoritosProvider";
 
 interface CardProdutoProps {
-  id: string;
   produto: ItemProduto;
-  favoritos: CardProdutoProps[];
-  setFavoritos: React.Dispatch<React.SetStateAction<CardProdutoProps[]>>;
+  ehFav?: boolean;
+  adicionarAoCarrinho(produto: ItemProduto): void;
 }
 
 export default function CardProduto({
   produto,
-  favoritos,
-  setFavoritos,
+  ehFav,
+  adicionarAoCarrinho,
 }: CardProdutoProps) {
-  const adicionarAosFavoritos = (produto: CardProdutoProps) => {
-    setFavoritos((favoritos) => [...favoritos, produto]);
-  };
+  const router = useRouter();
+  const [favoritos, setFavoritos] = useFavoritosContext();
+  const ehFavorito = useVerificaProdutoFavorito(produto.id);
 
-  const ehFavorito = favoritos.some((item) => item.id === produto.id);
+  const verDetalhesProduto = () => {
+    router.push(`/produto/${produto.nome}`);
+  };
 
   return (
     <div className="col">
@@ -33,14 +39,43 @@ export default function CardProduto({
         <div className="card-body bg-light">
           <h5 className="card-title">{produto.nome}</h5>
           <p className="card-text text-secondary">R$ {produto.preco}</p>
+
+          {!ehFav && (
+            <button
+              className="btn btn-success d-block w-100 "
+              type="button"
+              onClick={() => adicionarAoCarrinho(produto)}
+            ></button>
+          )}
+          {!ehFav && (
+            <button
+              className="btn btn-success d-block w-100 "
+              type="button"
+              children={ehFavorito ? "Adicionado" : "Add Fav"}
+              onClick={() =>
+                setFavoritos(favoritos ? [...favoritos, produto] : [produto])
+              }
+              disabled={ehFavorito}
+            ></button>
+          )}
+
+          {ehFav && (
+            <button
+              className="btn btn-danger d-block w-100"
+              type="button"
+              children={"Remover Favorito"}
+              onClick={() =>
+                setFavoritos((favoritos) =>
+                  favoritos?.filter((item) => item.id !== produto.id)
+                )
+              }
+            />
+          )}
           <button
-            className="btn btn-success d-block w-100 "
+            className="btn d-block w-100 "
             type="button"
-            onClick={() => adicionarAosFavoritos(produto)}
-            disabled={ehFavorito}
-          >
-            {ehFavorito ? "Adicionado" : "Adicionar aos favoritos"}
-          </button>
+            onClick={() => verDetalhesProduto()}
+          ></button>
         </div>
       </div>
     </div>

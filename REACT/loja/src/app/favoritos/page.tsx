@@ -1,10 +1,10 @@
 "use client";
+
 import ListagemFavoritos from "../components/ListagemFavoritos/ListagemFavoritos";
-import { useState } from "react";
-import { ItemProduto } from "../types/produto";
+import { useFavoritosContext } from "../components/FavoritosProvider/FavoritosProvider";
 
 export default function Favoritos() {
-  const [favoritos, setFavoritos] = useState<ItemProduto[] | []>([]);
+  const [favoritos, setFavoritos] = useFavoritosContext();
 
   return (
     <main>

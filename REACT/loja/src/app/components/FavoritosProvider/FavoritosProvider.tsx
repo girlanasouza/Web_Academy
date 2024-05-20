@@ -1,32 +1,41 @@
-// FavoritosProvider.tsx
-import React, { createContext, useContext, useState, ReactNode } from "react";
+"use client";
+
+import React, { createContext, use, useContext, useState } from "react";
 import { ItemProduto } from "@/app/types/produto";
 
-interface FavoritosContextType {
-  favoritos: ItemProduto[];
-  setFavoritos: React.Dispatch<React.SetStateAction<ItemProduto[]>>;
+export type FavoritosContextType = [
+  ItemProduto[],
+  React.Dispatch<React.SetStateAction<ItemProduto[]>>
+];
+
+interface FavoritosProviderProps {
+  children: React.ReactNode;
 }
 
-const FavoritosContext = createContext<FavoritosContextType | undefined>(
-  undefined
-);
+const FavoritosContext = createContext<FavoritosContextType>([[], () => {}]);
 
-export const FavoritosProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const FavoritosProvider = ({ children }: FavoritosProviderProps) => {
   const [favoritos, setFavoritos] = useState<ItemProduto[]>([]);
 
   return (
-    <FavoritosContext.Provider value={{ favoritos, setFavoritos }}>
+    <FavoritosContext.Provider value={[favoritos, setFavoritos]}>
       {children}
     </FavoritosContext.Provider>
   );
 };
 
-export const useFavoritos = (): FavoritosContextType => {
-  const context = useContext(FavoritosContext);
-  if (!context) {
-    throw new Error("useFavoritos must be used within a FavoritosProvider");
-  }
-  return context;
+export const useFavoritosContext = (): FavoritosContextType => {
+  const [favoritos, setFavoritos] = useContext(FavoritosContext);
+  return [favoritos, setFavoritos];
+};
+
+export const useProdutosFavoritos = (): ItemProduto[] => {
+  const [favoritos, setFavoritos] = useContext(FavoritosContext);
+  return favoritos;
+};
+
+export const useVerificaProdutoFavorito = (id: string): boolean => {
+  const [favoritos, setFavoritos] = useContext(FavoritosContext);
+  const ehFav = favoritos?.some((item) => item.id === id);
+  return ehFav;
 };

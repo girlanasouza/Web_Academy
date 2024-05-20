@@ -1,34 +1,29 @@
 import { ItemProduto } from "@/app/types/produto";
 import CardProduto from "../CardProduto/CardProduto";
-import ResumoFavoritos from "../ResumoFavoritos/ResumoFavoritos";
 
-interface IListagemProdutos {
-  produtos: ItemProduto[];
+interface ResumoCarrinhoProps {
   favoritos: ItemProduto[];
   setFavoritos: React.Dispatch<React.SetStateAction<ItemProduto[]>>;
 }
 
-export default function ListagemProdutos({
-  produtos,
+export default function ResumoFavoritos({
   favoritos,
   setFavoritos,
-}: IListagemProdutos) {
+}: ResumoCarrinhoProps) {
   return (
-    <>
-      <h5 className="mb-3">Produtos disponíveis:</h5>
+    <div className="mt-4">
+      <h5 className="mb-4">Seus produtos favoritos:</h5>
 
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-        {produtos.map((produto) => (
+        {favoritos.map((produto) => (
           <CardProduto
             key={produto.id}
             produto={produto}
-            setFavoritos={setFavoritos}
             favoritos={favoritos}
+            setFavoritos={setFavoritos}
           />
         ))}
       </div>
-
-      <ResumoFavoritos favoritos={favoritos} setFavoritos={setFavoritos} />
-    </>
+    </div>
   );
 }

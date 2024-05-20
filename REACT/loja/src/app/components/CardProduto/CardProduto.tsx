@@ -1,28 +1,23 @@
-import Image from "next/image";
-import Router, { useRouter } from "next/navigation";
 import { ItemProduto } from "@/app/types/produto";
-import { useDetalhesProduto } from "@/app/hooks/useDetalhesProduto";
+import Image from "next/image";
 
 interface CardProdutoProps {
+  id: string;
   produto: ItemProduto;
-  adicionarAoCarrinho: (produto: ItemProduto) => void;
+  favoritos: CardProdutoProps[];
+  setFavoritos: React.Dispatch<React.SetStateAction<CardProdutoProps[]>>;
 }
 
 export default function CardProduto({
   produto,
-  adicionarAoCarrinho,
+  favoritos,
+  setFavoritos,
 }: CardProdutoProps) {
-  const router = useRouter();
-
-  const verDetalhesProduto = (nomeProduto: string) => {
-    router.push(`/produto/${nomeProduto}`);
+  const adicionarAosFavoritos = (produto: CardProdutoProps) => {
+    setFavoritos((favoritos) => [...favoritos, produto]);
   };
 
-  const { data, isPending, isError } = useDetalhesProduto(produto.nome);
-
-  if (isPending) return <h5>Carregando...</h5>;
-  if (isError) return <h5>Ocorreu um erro ao carregar os produtos!!!</h5>;
-  if (!data) return <h5>O produto não está resolvido!!!</h5>;
+  const ehFavorito = favoritos.some((item) => item.id === produto.id);
 
   return (
     <div className="col">
@@ -30,7 +25,7 @@ export default function CardProduto({
         <Image
           src={produto.fotos[0].src}
           className="card-img-top"
-          alt={produto.fotos[0].titulo}
+          alt="imagem placeholder"
           width={300}
           height={320}
         />
@@ -39,17 +34,12 @@ export default function CardProduto({
           <h5 className="card-title">{produto.nome}</h5>
           <p className="card-text text-secondary">R$ {produto.preco}</p>
           <button
-            onClick={() => adicionarAoCarrinho(produto)}
-            className="btn btn-dark d-block w-100"
-          >
-            Adicionar no carrinho
-          </button>
-          <button
-            onClick={() => verDetalhesProduto(produto.nome)}
-            className="btn btn-light d-block w-100 mt-2"
+            className="btn btn-success d-block w-100 "
             type="button"
+            onClick={() => adicionarAosFavoritos(produto)}
+            disabled={ehFavorito}
           >
-            Ver detalhes
+            {ehFavorito ? "Adicionado" : "Adicionar aos favoritos"}
           </button>
         </div>
       </div>

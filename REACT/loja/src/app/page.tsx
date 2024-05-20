@@ -6,6 +6,7 @@ import { mockItensCarrinho } from "./mocks/itensCarrinho";
 import ResumoCarrinho from "./components/ResumoCarrinho/ResumoCarrinho";
 import ListagemProdutos from "./components/ListagemProdutos/ListagemProdutos";
 import { FavoritosProvider } from "./components/FavoritosProvider/FavoritosProvider";
+import { ResumoFavoritos } from "./components/ResumoFavoritos/ResumoFavoritos";
 
 export default function App() {
   const carrinho: Carrinho = {
@@ -30,6 +31,7 @@ export default function App() {
               precoTotal={precoTotal}
             />
             <ListagemProdutos adicionarAoCarrinho={adicionarAoCarrinho} />
+            <ResumoFavoritos />
           </div>
         </main>
       </FavoritosProvider>

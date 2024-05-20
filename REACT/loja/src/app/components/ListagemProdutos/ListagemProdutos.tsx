@@ -1,6 +1,5 @@
 import { ItemProduto } from "@/app/types/produto";
 import CardProduto from "../CardProduto/CardProduto";
-import ResumoFavoritos from "../ResumoFavoritos/ResumoFavoritos";
 import { useListaProdutos } from "@/app/hooks/useListaProdutos";
 
 interface IListagemProdutos {

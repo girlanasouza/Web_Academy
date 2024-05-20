@@ -42,40 +42,46 @@ export default function CardProduto({
 
           {!ehFav && (
             <button
-              className="btn btn-success d-block w-100 "
+              className="btn btn-dark d-block w-100 "
               type="button"
               onClick={() => adicionarAoCarrinho(produto)}
-            ></button>
+            >
+              Carrinho
+            </button>
           )}
           {!ehFav && (
             <button
-              className="btn btn-success d-block w-100 "
+              className="btn btn-success d-block w-100 mt-2"
               type="button"
-              children={ehFavorito ? "Adicionado" : "Add Fav"}
               onClick={() =>
                 setFavoritos(favoritos ? [...favoritos, produto] : [produto])
               }
               disabled={ehFavorito}
-            ></button>
+            >
+              {ehFavorito ? "Adicionado" : "Favoritos"}
+            </button>
           )}
 
           {ehFav && (
             <button
               className="btn btn-danger d-block w-100"
               type="button"
-              children={"Remover Favorito"}
               onClick={() =>
                 setFavoritos((favoritos) =>
                   favoritos?.filter((item) => item.id !== produto.id)
                 )
               }
-            />
+            >
+              Remover Favorito
+            </button>
           )}
           <button
             className="btn d-block w-100 "
             type="button"
             onClick={() => verDetalhesProduto()}
-          ></button>
+          >
+            Ver detalhes
+          </button>
         </div>
       </div>
     </div>

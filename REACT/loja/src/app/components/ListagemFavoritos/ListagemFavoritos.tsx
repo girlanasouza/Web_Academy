@@ -25,11 +25,7 @@ export default function ListagemFavoritos({
             </thead>
             <tbody>
               {produtosFavoritos.map((item) => (
-                <ItemFavorito
-                  key={item.id}
-                  itemFavorito={item}
-                  setFavoritos={setFavoritos}
-                />
+                <ItemFavorito key={item.id} itemFavorito={item} />
               ))}
             </tbody>
           </table>

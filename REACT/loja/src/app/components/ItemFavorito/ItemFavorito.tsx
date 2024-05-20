@@ -1,16 +1,17 @@
 import { ItemProduto } from "@/app/types/produto";
+import { useFavoritosContext } from "../FavoritosProvider/FavoritosProvider";
 
 interface IItemFavoritoProps {
   itemFavorito: ItemProduto;
-  setFavoritos: React.Dispatch<React.SetStateAction<ItemProduto[]>>;
 }
 
-export default function ItemFavorito({
-  itemFavorito,
-  setFavoritos,
-}: IItemFavoritoProps) {
+export default function ItemFavorito({ itemFavorito }: IItemFavoritoProps) {
+  const [favoritos, setFavoritos] = useFavoritosContext();
+
   const removerFavorito = (id: string) => {
-    setFavoritos((favoritos) => favoritos.filter((item) => item.id !== id));
+    favoritos
+      ? setFavoritos((favoritos) => favoritos.filter((item) => item.id !== id))
+      : null;
   };
 
   return (

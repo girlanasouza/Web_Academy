@@ -8,7 +8,7 @@ export const ResumoFavoritos = () => {
 
   return (
     <div className="mt-4">
-      <h5 className="mb-4">Seus produtos favoritos:</h5>
+      <h5 className="mb-4">Seus produtos favoritos</h5>
 
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
         {favoritos.map((produto) => (

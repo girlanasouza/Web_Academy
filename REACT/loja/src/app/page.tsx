@@ -4,7 +4,6 @@ import { ItemProduto } from "./types/produto";
 import React, { useState } from "react";
 import ResumoCarrinho from "./components/ResumoCarrinho/ResumoCarrinho";
 import ListagemProdutos from "./components/ListagemProdutos/ListagemProdutos";
-import FavoritosProvider from "./components/FavoritosProvider/FavoritosProvider";
 import { ResumoFavoritos } from "./components/ResumoFavoritos/ResumoFavoritos";
 
 export default function App() {

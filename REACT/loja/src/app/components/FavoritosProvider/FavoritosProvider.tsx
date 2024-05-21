@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, use, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { ItemProduto } from "@/app/types/produto";
 
 export type FavoritosContextType = [
@@ -14,7 +14,7 @@ interface FavoritosProviderProps {
 
 const FavoritosContext = createContext<FavoritosContextType>([[], () => {}]);
 
-export const FavoritosProvider = ({ children }: FavoritosProviderProps) => {
+const FavoritosProvider = ({ children }: FavoritosProviderProps) => {
   const [favoritos, setFavoritos] = useState<ItemProduto[]>([]);
 
   return (
@@ -39,3 +39,5 @@ export const useVerificaProdutoFavorito = (id: string): boolean => {
   const ehFav = favoritos?.some((item) => item.id === id);
   return ehFav;
 };
+
+export default FavoritosProvider;

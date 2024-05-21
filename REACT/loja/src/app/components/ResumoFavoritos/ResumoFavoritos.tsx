@@ -1,27 +1,24 @@
-import { ItemProduto } from "@/app/types/produto";
 import CardProduto from "../CardProduto/CardProduto";
 import { useProdutosFavoritos } from "../FavoritosProvider/FavoritosProvider";
 
 export const ResumoFavoritos = () => {
   const favoritos = useProdutosFavoritos();
 
+  if (!favoritos) return;
+
   return (
     <div className="mt-4">
       <h5 className="mb-4">Seus produtos favoritos:</h5>
 
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-        {favoritos ? (
-          favoritos.map((produto) => (
-            <CardProduto
-              key={produto.id}
-              produto={produto}
-              adicionarAoCarrinho={() => {}}
-              ehFav={true}
-            />
-          ))
-        ) : (
-          <p>Você não tem produtos favoritos.</p>
-        )}
+        {favoritos.map((produto) => (
+          <CardProduto
+            key={produto.id}
+            produto={produto}
+            adicionarAoCarrinho={() => {}}
+            ehFav={true}
+          />
+        ))}
       </div>
     </div>
   );

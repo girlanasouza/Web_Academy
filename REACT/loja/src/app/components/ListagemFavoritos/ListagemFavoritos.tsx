@@ -1,7 +1,7 @@
 import { ItemProduto } from "@/app/types/produto";
 import ItemFavorito from "../ItemFavorito/ItemFavorito";
 
-interface IListagemFavoritosProps {
+interface ListagemFavoritosProps {
   produtosFavoritos: ItemProduto[];
   setFavoritos: React.Dispatch<React.SetStateAction<ItemProduto[]>>;
 }
@@ -9,7 +9,7 @@ interface IListagemFavoritosProps {
 export default function ListagemFavoritos({
   produtosFavoritos,
   setFavoritos,
-}: IListagemFavoritosProps) {
+}: ListagemFavoritosProps) {
   return (
     <div className="card mb-4">
       <div className="row card-body">

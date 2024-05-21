@@ -20,7 +20,7 @@ export default function CardProduto({
   const router = useRouter();
   const [favoritos, setFavoritos] = useFavoritosContext();
   const ehFavorito = useVerificaProdutoFavorito(produto.id);
-
+  console.log(ehFavorito);
   const verDetalhesProduto = () => {
     router.push(`/produto/${produto.nome}`);
   };

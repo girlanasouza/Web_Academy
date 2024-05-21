@@ -13,6 +13,9 @@
   "paths": {
     "/v1/produto/": {
       "get": {
+        "tags": [
+          "Produto"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -21,6 +24,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Produto"
+        ],
         "description": "",
         "parameters": [
           {
@@ -45,6 +51,9 @@
     },
     "/v1/produto/{id}": {
       "get": {
+        "tags": [
+          "Produto"
+        ],
         "description": "",
         "parameters": [
           {
@@ -61,6 +70,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Produto"
+        ],
         "description": "",
         "parameters": [
           {
@@ -89,6 +101,117 @@
         }
       },
       "delete": {
+        "tags": [
+          "Produto"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/compra/{id}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/v1/compra/": {
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/usuario/": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "tipoUsuario",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/usuario/{id}": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -131,6 +254,9 @@
     },
     "/v1/auth/signup": {
       "post": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "responses": {
           "201": {
@@ -144,6 +270,9 @@
     },
     "/v1/auth/login": {
       "post": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "responses": {
           "500": {
@@ -154,6 +283,9 @@
     },
     "/v1/auth/logout": {
       "post": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "responses": {
           "default": {

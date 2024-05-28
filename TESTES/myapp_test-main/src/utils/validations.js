@@ -22,6 +22,7 @@ function firstName(fullName) {
  * @returns {boolean} - Returns true if the desired quantity of the specified product type is available in stock,
  *                      otherwise returns false.
  */
+// correcao: comparando qty com availableStock
 function verifyStockAvailability(productType, qty) {
   const stock = {
     laptop: 10,
@@ -32,8 +33,7 @@ function verifyStockAvailability(productType, qty) {
   };
 
   const availableStock = stock[productType];
-  if (availableStock === 0) return false;
-  else return true;
+  return availableStock >= qty; // return true if the availableStock is greater than qty else return false
 }
 
 /**
@@ -53,7 +53,7 @@ function verifyStockAvailability(productType, qty) {
 function calculateTotalPrice(products) {
   let total = 0;
   for (let i = 0; i < products.length; i++) {
-    total = products[i].price;
+    total += products[i].price * products[i].quantity;
   }
   return total;
 }

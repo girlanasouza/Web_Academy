@@ -50,6 +50,7 @@ function verifyStockAvailability(productType, qty) {
  *     { name: 'Product 3', price: 20, quantity: 1 }
  *   ]
  */
+// correcao: o valor total está sendo incrementado e multiplicado pela quantidade de cada produto
 function calculateTotalPrice(products) {
   let total = 0;
   for (let i = 0; i < products.length; i++) {
@@ -59,7 +60,3 @@ function calculateTotalPrice(products) {
 }
 
 module.exports = { firstName, verifyStockAvailability, calculateTotalPrice };
-
-console.log(firstName("Teste"));
-console.log(firstName(" Teste"));
-console.log(firstName(" Teste "));
